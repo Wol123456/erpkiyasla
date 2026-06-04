@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Karşılaştırma - ERPKıyasla</title>
+<meta name="description" content="Logo Tiger, AKINSOFT Wolvox, DİA, caniasERP ve 20+ ERP yazılımını yan yana karşılaştırın.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="logo">ERP<span>Kıyasla</span></a>
+  <ul class="nav-links">
+    <li><a href="karsilastir.html" class="active">Karşılaştır</a></li>
+    <li><a href="#">ERP Rehberi</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Hakkımızda</a></li>
+  </ul>
+  <a href="karsilastir.html" class="nav-cta">Karşılaştırmaya Başla</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> → <span style="color:var(--tq)">ERP Karşılaştırma</span></div>
+  <h1>Yerli ERP Yazılımları Karşılaştırması</h1>
+  <p>20+ ERP ürünü arasından seçin — ikili, üçlü veya dörtlü karşılaştırma yapın</p>
+  <div class="filter-bar">
+    <button class="filter-tab active">Genel Bakış</button>
+    <button class="filter-tab">Modüller</button>
+    <button class="filter-tab">Fiyat</button>
+    <button class="filter-tab">Yorumlar</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="comp-main">
+
+  <!-- MODE -->
+  <div class="mode-bar">
+    <span class="mode-label">Karşılaştırma modu:</span>
+    <button class="mode-btn sel" onclick="setMode(2)">İkili</button>
+    <button class="mode-btn" onclick="setMode(3)">Üçlü</button>
+    <button class="mode-btn" onclick="setMode(4)">Dörtlü</button>
+  </div>
+
+  <!-- PICKER -->
+  <div class="picker-box">
+    <div class="picker-title">
+      Ürün Seç <span class="cnt-badge" id="cnt-badge">0 seçildi</span>
+    </div>
+    <div class="vendors" id="vendors-list"></div>
+    <div class="picker-hint" id="picker-hint">
+      👆 Karşılaştırmak istediğiniz <span id="h-n">2</span> ürünü seçin
+    </div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div id="empty-state" class="empty">
+    <div class="empty-icon">⚖️</div>
+    <h3>Karşılaştırmaya Başlayın</h3>
+    <p>Yukarıdan ürünleri seçin.<br>İkili, üçlü veya dörtlü karşılaştırma yapabilirsiniz.</p>
+  </div>
+
+  <!-- COMPARE PANEL -->
+  <div class="comp-panel" id="comp-panel">
+    <div class="sec-title">Genel Değerlendirme</div>
+    <div class="comp-header-grid" id="header-grid"></div>
+    <div class="sec-title">Puan Karşılaştırması</div>
+    <table class="sc-table" id="score-table"></table>
+    <div class="sec-title">Modül Karşılaştırması</div>
+    <div class="mod-grid" id="mod-grid"></div>
+    <div class="sec-title">Artılar & Eksiler</div>
+    <div class="pc-grid" id="pc-grid"></div>
+    <div class="comp-cta">
+      <div>
+        <h3>Hangi ERP <em>size uygun?</em></h3>
+        <p>Sektörünüze ve ölçeğinize göre ücretsiz öneri alın.</p>
+      </div>
+      <div class="comp-cta-btns">
+        <button class="ccb2">Tüm ERP'leri Gör</button>
+        <button class="ccb1">Ücretsiz Danışmanlık →</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">ERP<span>Kıyasla</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Gizlilik</a></li>
+    <li><a href="#">Kullanım Şartları</a></li>
+    <li><a href="#">İletişim</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 erpkiyasla.com</div>
+</footer>
+
+<script src="erp-data.js"></script>
+<script src="compare.js"></script>
+</body>
+</html>
