@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Blog & Rehber - ERPKıyasla</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.blog-hero{background:linear-gradient(135deg,var(--navy-light) 0%,var(--tq-light) 100%);padding:56px 48px 40px;}
+.blog-hero h1{font-family:'Playfair Display',serif;font-size:36px;color:var(--navy);margin-bottom:10px;}
+.blog-hero h1 em{font-style:normal;color:var(--tq);}
+.blog-hero p{font-size:15px;color:var(--text-muted);max-width:520px;line-height:1.7;}
+.blog-main{padding:40px 48px;}
+.blog-list{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.bl-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .2s;cursor:pointer;}
+.bl-card:hover{box-shadow:0 6px 24px rgba(13,43,94,0.1);}
+.bl-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:42px;}
+.bl-body{padding:18px;}
+.bl-cat{font-size:11px;font-weight:600;color:var(--tq);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;}
+.bl-title{font-size:16px;font-weight:600;color:var(--navy);line-height:1.4;margin-bottom:8px;}
+.bl-excerpt{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:12px;}
+.bl-meta{font-size:12px;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between;}
+.bl-read{color:var(--tq);font-weight:500;text-decoration:none;font-size:13px;}
+.bl-read:hover{text-decoration:underline;}
+
+/* ARTICLE */
+.article-wrap{max-width:780px;margin:0 auto;padding:40px 48px;}
+.article-header{margin-bottom:32px;}
+.article-cat{font-size:12px;font-weight:600;color:var(--tq);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+.article-title{font-family:'Playfair Display',serif;font-size:34px;color:var(--navy);line-height:1.3;margin-bottom:14px;letter-spacing:-.5px;}
+.article-meta{font-size:13px;color:var(--text-muted);display:flex;gap:16px;flex-wrap:wrap;}
+.article-body h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:28px 0 12px;}
+.article-body p{font-size:15px;line-height:1.8;color:#3A4560;margin-bottom:16px;}
+.article-body ul,.article-body ol{padding-left:20px;margin-bottom:16px;}
+.article-body li{font-size:15px;line-height:1.8;color:#3A4560;margin-bottom:6px;}
+.article-body strong{color:var(--navy);}
+.info-box{background:var(--navy-light);border-left:3px solid var(--tq);padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;}
+.info-box p{margin:0;font-size:14px;}
+.comparison-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+.comparison-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-size:13px;}
+.comparison-table td{padding:10px 14px;border-bottom:1px solid var(--border);}
+.comparison-table tr:hover td{background:var(--navy-light);}
+.article-divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--tq);font-size:13px;font-weight:500;text-decoration:none;margin-bottom:24px;}
+.back-btn:hover{text-decoration:underline;}
+
+@media(max-width:900px){
+.blog-hero,.blog-main{padding:32px 20px;}
+.blog-list{grid-template-columns:1fr;}
+.article-wrap{padding:24px 20px;}
+.article-title{font-size:26px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">ERP<span>Kıyasla</span></a>
+  <ul class="nav-links">
+    <li><a href="karsilastir.html">Karşılaştır</a></li>
+    <li><a href="fiyatlar.html">Fiyatlar</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="#">Hakkımızda</a></li>
+  </ul>
+  <a href="karsilastir.html" class="nav-cta">Karşılaştırmaya Başla</a>
+</nav>
+
+<!-- Blog listesi -->
+<div id="blog-list-view">
+  <div class="blog-hero">
+    <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> → <span style="color:var(--tq)">Blog & Rehber</span></div>
+    <h1>ERP <em>Rehber & Blog</em></h1>
+    <p>Uzman değerlendirmeleri, sektör haberleri ve ERP seçim rehberleri.</p>
+  </div>
+
+  <div class="blog-main">
+    <div class="blog-list">
+
+      <div class="bl-card" onclick="showArticle('art1')">
+        <div class="bl-img" style="background:var(--navy-light)">📊</div>
+        <div class="bl-body">
+          <div class="bl-cat">Rehber</div>
+          <div class="bl-title">2025'te KOBİ'ler İçin En İyi ERP Yazılımları</div>
+          <div class="bl-excerpt">Türkiye'de 500.000'den fazla KOBİ faaliyet gösteriyor. Peki bu işletmeler için hangi ERP yazılımı gerçekten uygun?</div>
+          <div class="bl-meta">
+            <span>8 dk okuma · Haziran 2025</span>
+            <a class="bl-read" onclick="showArticle('art1')">Oku →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bl-card" onclick="showArticle('art2')">
+        <div class="bl-img" style="background:var(--tq-light)">☁️</div>
+        <div class="bl-body">
+          <div class="bl-cat">Bulut ERP</div>
+          <div class="bl-title">Bulut ERP mi, On-Premise mi? Hangisi Size Uygun?</div>
+          <div class="bl-excerpt">ERP yazılımı seçerken karşılaştığınız en kritik karar: bulutta mı yoksa kendi sunucunuzda mı çalışmalı?</div>
+          <div class="bl-meta">
+            <span>5 dk okuma · Mayıs 2025</span>
+            <a class="bl-read" onclick="showArticle('art2')">Oku →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bl-card" onclick="showArticle('art3')">
+        <div class="bl-img" style="background:#FFF8E7">💡</div>
+        <div class="bl-body">
+          <div class="bl-cat">İpuçları</div>
+          <div class="bl-title">ERP Seçiminde Yapılan 7 Kritik Hata</div>
+          <div class="bl-excerpt">ERP projelerinin %70'i beklentileri karşılamıyor. Bu başarısızlıkların arkasında genellikle aynı hatalar yatıyor.</div>
+          <div class="bl-meta">
+            <span>4 dk okuma · Mayıs 2025</span>
+            <a class="bl-read" onclick="showArticle('art3')">Oku →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MAKALE 1 -->
+<div id="art1" style="display:none">
+  <div class="article-wrap">
+    <a class="back-btn" onclick="showList()">← Blog'a Dön</a>
+    <div class="article-header">
+      <div class="article-cat">📊 Rehber</div>
+      <h1 class="article-title">2025'te KOBİ'ler İçin En İyi ERP Yazılımları</h1>
+      <div class="article-meta">
+        <span>✍️ ERPKıyasla Editörü</span>
+        <span>📅 Haziran 2025</span>
+        <span>⏱ 8 dakika okuma</span>
+      </div>
+    </div>
+    <div class="article-body">
+      <p>Türkiye'de 500.000'den fazla KOBİ faaliyet gösteriyor. Bu işletmelerin büyük çoğunluğu hâlâ Excel tabloları, ayrı muhasebe yazılımları ve birbirine bağlanmayan sistemlerle çalışıyor. Oysa doğru bir ERP yazılımı, bir KOBİ'nin verimliliğini kısa sürede ciddi ölçüde artırabilir.</p>
+
+      <div class="info-box"><p>💡 <strong>Ne zaman ERP almanız gerekir?</strong> Sipariş takibini kaybetmeye başladığınızda, stok sayımı günler alıyorsa, muhasebe ile satış verileri uyuşmuyorsa — ERP zamanı gelmiştir.</p></div>
+
+      <h2>KOBİ'ler İçin ERP Seçerken Nelere Dikkat Edilmeli?</h2>
+      <p>Büyük kurumsal ERP yazılımları (SAP, Oracle gibi) KOBİ'ler için genellikle fazla karmaşık ve pahalıdır. KOBİ'lere uygun bir ERP şu özellikleri taşımalıdır:</p>
+      <ul>
+        <li><strong>Hızlı kurulum:</strong> 3 ayı aşan kurulum süreleri KOBİ'ler için risklidir.</li>
+        <li><strong>Uygun maliyet:</strong> Yıllık 50.000–200.000 ₺ aralığında çözümler mevcuttur.</li>
+        <li><strong>Türk mevzuatı uyumu:</strong> e-Fatura, e-Arşiv, e-Defter zorunlu olmalı.</li>
+        <li><strong>Kolay kullanım:</strong> Uzun eğitim gerektirmemeli.</li>
+        <li><strong>Yerel destek:</strong> Türkçe destek ve kolay ulaşılabilir iş ortakları önemli.</li>
+      </ul>
+
+      <h2>2025'te KOBİ'ler İçin Öne Çıkan 5 ERP</h2>
+
+      <h2 style="font-size:18px">1. Logo GO — En Yaygın KOBİ Tercihi</h2>
+      <p>Logo'nun KOBİ segmentine yönelik ürünü olan Logo GO, Türkiye'de en fazla kullanılan ERP yazılımlarından biri. Web tabanlı erişim imkanı, hızlı kurulum süresi ve Logo'nun geniş iş ortağı ağı sayesinde güçlü satış sonrası destek sunuyor. Muhasebe, stok yönetimi ve e-Fatura gibi temel modülleri kapsıyor.</p>
+
+      <h2 style="font-size:18px">2. AKINSOFT Wolvox — Fiyat/Kalite Şampiyonu</h2>
+      <p>Tek seferlik lisans modeliyle öne çıkan Wolvox ERP, özellikle perakende ve ticaret sektöründeki KOBİ'lerin favorisi. Barkod/POS entegrasyonu, seri/lot takibi ve uygun fiyatlandırması ile öne çıkıyor. Bulut desteği sınırlı olsa da on-premise kurulum için güçlü bir seçenek.</p>
+
+      <h2 style="font-size:18px">3. DİA Bulut ERP — Sıfır IT Maliyeti</h2>
+      <p>Sunucu, kurulum, bakım masrafı olmaksızın aylık abonelik modeliyle çalışan DİA, IT altyapısına yatırım yapmak istemeyen KOBİ'ler için ideal. Özellikle restoran, otel ve perakende sektöründe sektörel modülleriyle öne çıkıyor.</p>
+
+      <h2 style="font-size:18px">4. Mikro Jump — Bütçe Dostu Denge</h2>
+      <p>35 yılı aşkın geçmişiyle Mikro Yazılım, KOBİ segmentinde güvenilir bir isim. Mikro Jump, muhasebe, stok, satış ve bütçe kontrolü modüllerini dengeli bir fiyatla bir araya getiriyor. Türk mevzuatına tam uyumlu.</p>
+
+      <h2 style="font-size:18px">5. ERP LioX (Uyumsoft) — Modern Bulut Alternatifi</h2>
+      <p>Uyumsoft'un yeni nesil bulut ERP'si LioX, modern arayüzü, güçlü API desteği ve iş zekası entegrasyonuyla dikkat çekiyor. Özellikle yazılım entegrasyonuna önem veren ve veriyi analiz etmek isteyen KOBİ'ler için uygun bir seçenek.</p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr><th>ERP</th><th>Kullanım Kolaylığı</th><th>Fiyat/Kalite</th><th>Bulut</th><th>Önerilen Sektör</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Logo GO</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐½</td><td>Kısmi</td><td>Genel KOBİ</td></tr>
+          <tr><td>Wolvox ERP</td><td>⭐⭐⭐⭐½</td><td>⭐⭐⭐⭐½</td><td>❌</td><td>Perakende, Ticaret</td></tr>
+          <tr><td>DİA ERP</td><td>⭐⭐⭐⭐½</td><td>⭐⭐⭐⭐</td><td>✅ Tam</td><td>Restoran, Otel, Perakende</td></tr>
+          <tr><td>Mikro Jump</td><td>⭐⭐⭐⭐½</td><td>⭐⭐⭐⭐½</td><td>Kısmi</td><td>Genel KOBİ</td></tr>
+          <tr><td>ERP LioX</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>✅ Tam</td><td>Üretim, Teknoloji</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Sonuç</h2>
+      <p>KOBİ'ler için "en iyi ERP" diye tek bir cevap yok. Perakende firmaları için Wolvox veya DİA uygunken, üretim yapan firmalar için Mikro Run ya da LioX daha iyi bir seçenek olabilir. En doğru yaklaşım: sektörünüze ve önceliklerinize göre 2-3 ERP'yi karşılaştırmak.</p>
+
+      <div class="info-box"><p>🎯 <strong>Hızlı başlangıç:</strong> <a href="karsilastir.html" style="color:var(--tq)">Karşılaştırma aracımızı</a> kullanarak bu 5 ERP'yi yan yana inceleyin.</p></div>
+    </div>
+    <hr class="article-divider">
+    <a class="back-btn" onclick="showList()">← Tüm Yazılara Dön</a>
+  </div>
+</div>
+
+<!-- MAKALE 2 -->
+<div id="art2" style="display:none">
+  <div class="article-wrap">
+    <a class="back-btn" onclick="showList()">← Blog'a Dön</a>
+    <div class="article-header">
+      <div class="article-cat">☁️ Bulut ERP</div>
+      <h1 class="article-title">Bulut ERP mi, On-Premise mi? Hangisi Size Uygun?</h1>
+      <div class="article-meta">
+        <span>✍️ ERPKıyasla Editörü</span>
+        <span>📅 Mayıs 2025</span>
+        <span>⏱ 5 dakika okuma</span>
+      </div>
+    </div>
+    <div class="article-body">
+      <p>ERP yazılımı seçerken karşılaştığınız en kritik karar genellikle bu oluyor: Yazılım bulutta mı çalışmalı, yoksa kendi sunucunuzda mı? Her iki modelin de güçlü ve zayıf yönleri var. Doğru seçim tamamen işletmenizin yapısına bağlı.</p>
+
+      <h2>Bulut ERP Nedir?</h2>
+      <p>Bulut ERP (SaaS – Software as a Service), yazılımın sağlayıcının sunucularında barındırıldığı ve internet üzerinden erişildiği modeldir. Türkiye'de bu modelde öne çıkan çözümler arasında DİA Bulut ERP, Workcube, ERP LioX ve ERP12 sayılabilir.</p>
+      <ul>
+        <li>✅ Kurulum gerektirmez, hemen başlanabilir</li>
+        <li>✅ Sunucu, donanım ve IT personeli maliyeti yok</li>
+        <li>✅ Her yerden, her cihazdan erişim</li>
+        <li>✅ Otomatik güncellemeler ve yedekleme</li>
+        <li>❌ İnternet bağlantısı zorunlu</li>
+        <li>❌ Uzun vadede aylık maliyet birikir</li>
+        <li>❌ Veri kontrolü sağlayıcıda</li>
+      </ul>
+
+      <h2>On-Premise ERP Nedir?</h2>
+      <p>On-premise ERP, yazılımın kendi sunucunuzda kurulup çalıştırıldığı geleneksel modeldir. Logo Tiger, AKINSOFT Wolvox, Mikro ERP bu modelin tipik örnekleridir.</p>
+      <ul>
+        <li>✅ Veriler tamamen sizde</li>
+        <li>✅ İnternet olmadan çalışır</li>
+        <li>✅ Uzun vadede daha düşük toplam maliyet olabilir</li>
+        <li>❌ Sunucu ve donanım yatırımı gerekir</li>
+        <li>❌ IT personeli ya da dış destek gerekebilir</li>
+        <li>❌ Uzaktan erişim için ek yapılandırma gerekir</li>
+      </ul>
+
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Kriter</th><th>Bulut ERP</th><th>On-Premise ERP</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Başlangıç Maliyeti</td><td>Düşük</td><td>Yüksek</td></tr>
+          <tr><td>Uzun Vadeli Maliyet</td><td>Birikimli</td><td>Daha düşük olabilir</td></tr>
+          <tr><td>Kurulum Süresi</td><td>Günler</td><td>Haftalar / Aylar</td></tr>
+          <tr><td>Veri Güvenliği</td><td>Sağlayıcıda</td><td>Firmada</td></tr>
+          <tr><td>Mobil Erişim</td><td>Kolay</td><td>Karmaşık</td></tr>
+          <tr><td>Özelleştirme</td><td>Sınırlı</td><td>Geniş</td></tr>
+          <tr><td>Güncellemeler</td><td>Otomatik</td><td>Manuel / Ücretli</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Hangi Firmaya Ne Uygun?</h2>
+      <div class="info-box"><p>☁️ <strong>Bulut ERP tercih edin eğer:</strong> IT altyapısı kurmak istemiyorsanız, hızlı başlamak istiyorsanız, küçük-orta ölçekliyseniz veya birden fazla şubeden erişim gerekiyorsa.</p></div>
+      <div class="info-box"><p>🖥 <strong>On-Premise tercih edin eğer:</strong> Veri gizliliği kritikse, internet altyapınız güvenilir değilse, kapsamlı özelleştirme gerekiyorsa veya büyük ölçekli üretim yapıyorsanız.</p></div>
+
+      <h2>Hibrit Model: En İyisi İkisi Birden</h2>
+      <p>Logo Wings ve caniasERP gibi modern ERP'ler artık hem bulut hem on-premise seçeneği sunuyor. Kritik veriler kendi sunucunuzda dururken, erişim bulut üzerinden sağlanabiliyor. Bu hibrit yaklaşım, özellikle orta ve büyük ölçekli firmalar için giderek daha popüler hale geliyor.</p>
+
+      <h2>Sonuç</h2>
+      <p>2025 itibarıyla Türkiye'de bulut ERP kullanımı hızla artıyor. Özellikle 10-50 kullanıcılı firmalar için bulut modeli maliyet ve pratiklik açısından öne çıkıyor. Ancak veri güvenliği, üretim süreçleri ve özelleştirme ihtiyacı yüksek firmalar için on-premise hâlâ güçlü bir seçenek olmaya devam ediyor.</p>
+    </div>
+    <hr class="article-divider">
+    <a class="back-btn" onclick="showList()">← Tüm Yazılara Dön</a>
+  </div>
+</div>
+
+<!-- MAKALE 3 -->
+<div id="art3" style="display:none">
+  <div class="article-wrap">
+    <a class="back-btn" onclick="showList()">← Blog'a Dön</a>
+    <div class="article-header">
+      <div class="article-cat">💡 İpuçları</div>
+      <h1 class="article-title">ERP Seçiminde Yapılan 7 Kritik Hata</h1>
+      <div class="article-meta">
+        <span>✍️ ERPKıyasla Editörü</span>
+        <span>📅 Mayıs 2025</span>
+        <span>⏱ 4 dakika okuma</span>
+      </div>
+    </div>
+    <div class="article-body">
+      <p>Araştırmalara göre ERP projelerinin yüzde yetmişi beklentileri karşılamıyor. Bu başarısızlıkların arkasında genellikle teknik değil, stratejik hatalar yatıyor. İşte firmalar ERP seçerken en sık yaptığı 7 kritik hata:</p>
+
+      <h2>1. Fiyatı Tek Kriter Olarak Görmek</h2>
+      <p>En ucuz ERP çoğu zaman en pahalıya dönüşür. Lisans ücreti düşük bir yazılım, eksik özellikleri nedeniyle ek modül, özelleştirme ve entegrasyon maliyetleri yaratabilir. Toplam sahip olma maliyetini (TCO) değerlendirin: lisans + kurulum + eğitim + yıllık bakım + kayıp verimlilik.</p>
+
+      <h2>2. İhtiyaç Analizi Yapmadan Karar Vermek</h2>
+      <p>ERP alımından önce mutlaka bir ihtiyaç analizi yapılmalı. "Hangi süreçlerimiz çalışmıyor?", "Hangi verileri takip edemiyoruz?", "Kaç kullanıcı hangi modülleri kullanacak?" sorularına cevap verilmeden yapılan ERP seçimi neredeyse her zaman hayal kırıklığıyla sonuçlanır.</p>
+
+      <h2>3. Satış Demosuna Güvenmek</h2>
+      <p>ERP satıcılarının sunduğu demolar genellikle en iyi senaryolar üzerinden yapılır. Demo sırasında kendi işletmenizin senaryolarını test edin. "Bizim gibi üretim emirleri nasıl giriliyor?", "Çok şubeli stok takibi nasıl çalışıyor?" gibi gerçek hayat sorularını sorun.</p>
+
+      <div class="info-box"><p>✅ <strong>İpucu:</strong> Mutlaka referans müşteri ziyareti isteyin. Aynı sektörden, benzer ölçekteki bir firma ile konuşun.</p></div>
+
+      <h2>4. Üst Yönetimin Desteğini Almadan Başlamak</h2>
+      <p>ERP projeleri sadece IT veya muhasebe departmanının işi değil. Şirketteki tüm süreçleri etkiler. CEO veya genel müdür seviyesinde sahiplenilmeyen ERP projeleri direnç, yavaş implementasyon ve başarısızlıkla sonuçlanır.</p>
+
+      <h2>5. Gerçekçi Olmayan Zaman Planı</h2>
+      <p>Türkiye'de KOBİ ölçeğinde bir ERP implementasyonu ortalama 3-6 ay sürer. Büyük firmalar için bu süre 12-18 aya kadar çıkabilir. "2 haftada kuralım" beklentisi, veri aktarımı ve eğitim süreçleri göz önüne alındığında gerçekçi değildir.</p>
+
+      <h2>6. Çalışan Eğitimini Küçümsemek</h2>
+      <p>ERP yazılımının en pahalı kısmı lisans değil, insanları değişime adapte etmektir. Yeterli eğitim almayan kullanıcılar sistemi yanlış kullanır, veri kirlenir ve yazılımın faydası sıfıra düşer. Bütçenizin en az %20'sini eğitime ayırın.</p>
+
+      <h2>7. Veri Temizliğini Ertelemek</h2>
+      <p>"Eski verileri sonra temizleriz" düşüncesi çok tehlikeli. Kirli veri ile başlanan ERP, kirli veri ile devam eder. Sisteme geçmeden önce müşteri kartları, stok bilgileri ve bakiyeler mutlaka temizlenmeli ve doğrulanmalıdır.</p>
+
+      <h2>Özet: ERP Başarı Kontrol Listesi</h2>
+      <ul>
+        <li>✅ İhtiyaç analizi yapıldı mı?</li>
+        <li>✅ TCO (toplam maliyet) hesaplandı mı?</li>
+        <li>✅ Gerçek senaryo demosu yapıldı mı?</li>
+        <li>✅ Referans müşteri ziyareti yapıldı mı?</li>
+        <li>✅ Üst yönetim projeye sahip çıkıyor mu?</li>
+        <li>✅ Gerçekçi zaman planı hazırlandı mı?</li>
+        <li>✅ Eğitim bütçesi ayrıldı mı?</li>
+        <li>✅ Veri temizliği planlandı mı?</li>
+      </ul>
+
+      <div class="info-box"><p>🎯 Doğru ERP'yi bulmak için <a href="karsilastir.html" style="color:var(--tq)">karşılaştırma aracımızı</a> kullanın. İhtiyacınıza göre filtreleyip yan yana inceleyin.</p></div>
+    </div>
+    <hr class="article-divider">
+    <a class="back-btn" onclick="showList()">← Tüm Yazılara Dön</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">ERP<span>Kıyasla</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Gizlilik</a></li>
+    <li><a href="#">Kullanım Şartları</a></li>
+    <li><a href="#">İletişim</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 erpkiyasla.com</div>
+</footer>
+
+<script>
+function showArticle(id) {
+  document.getElementById('blog-list-view').style.display = 'none';
+  ['art1','art2','art3'].forEach(a => document.getElementById(a).style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+  window.scrollTo(0,0);
+}
+function showList() {
+  ['art1','art2','art3'].forEach(a => document.getElementById(a).style.display = 'none');
+  document.getElementById('blog-list-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

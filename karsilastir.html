@@ -4,42 +4,141 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ERP Karşılaştırma - ERPKıyasla</title>
-<meta name="description" content="Logo Tiger, AKINSOFT Wolvox, DİA, caniasERP ve 20+ ERP yazılımını yan yana karşılaştırın.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="description" content="20+ ERP yazılımını yan yana karşılaştırın. Genel özellikler, modüller ve fiyat sekmelerini inceleyin.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* MODE & PICKER same as before */
+.comp-main{padding:24px 48px;background:var(--bg);min-height:60vh;}
+.mode-bar{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.mode-label{font-size:12px;font-weight:500;color:var(--text-muted);}
+.mode-btn{padding:7px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--navy);transition:all .15s;}
+.mode-btn.sel{background:var(--navy);color:white;border-color:var(--navy);}
+.picker-box{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:22px;}
+.picker-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.cnt-badge{background:var(--tq);color:white;font-size:11px;padding:2px 9px;border-radius:10px;}
+.vendors{display:flex;flex-direction:column;gap:14px;}
+.vendor-row{display:flex;flex-direction:column;gap:7px;}
+.vendor-name{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;}
+.products-row{display:flex;flex-wrap:wrap;gap:7px;}
+.prod-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--navy);transition:all .15s;user-select:none;}
+.prod-chip:hover{border-color:var(--tq-mid);color:var(--tq);}
+.prod-chip.chosen{background:var(--navy);color:white;border-color:var(--navy);}
+.prod-chip .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.picker-hint{font-size:12px;color:var(--text-muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.picker-hint span{color:var(--tq);font-weight:500;}
+
+/* VIEW TABS */
+.view-tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0;}
+.vt{padding:9px 18px;border:none;background:none;font-size:13px;cursor:pointer;color:var(--text-muted);font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.vt.on{color:var(--tq);border-bottom-color:var(--tq);font-weight:500;}
+
+/* HEADER CARDS */
+.comp-header-grid{display:grid;gap:14px;margin-bottom:22px;}
+.erp-header-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;position:relative;}
+.erp-header-card.top{border-color:var(--tq);}
+.top-badge{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--tq);color:white;font-size:10px;font-weight:600;padding:2px 12px;border-radius:10px;white-space:nowrap;}
+.ehc-icon{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;margin:0 auto 10px;}
+.ehc-name{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px;}
+.ehc-vendor{font-size:11px;color:var(--text-muted);margin-bottom:7px;}
+.ehc-score{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);font-weight:700;}
+.ehc-score span{font-size:13px;color:var(--text-muted);font-family:'DM Sans',sans-serif;font-weight:400;}
+.ehc-stars{color:#F0A500;font-size:13px;margin-top:3px;}
+.ehc-tag{display:inline-block;background:var(--navy-light);color:var(--navy-mid);font-size:10px;padding:2px 9px;border-radius:10px;margin-top:7px;margin-right:3px;}
+
+.sec-title{font-size:15px;font-weight:600;color:var(--navy);margin:20px 0 12px;display:flex;align-items:center;gap:10px;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* SCORE TABLE */
+.sc-table{width:100%;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:4px;border-collapse:collapse;}
+.sc-table thead tr{background:var(--navy);}
+.sc-table thead th{padding:12px 16px;font-size:11px;font-weight:500;color:rgba(255,255,255,.7);text-align:left;}
+.sc-table thead th:first-child{color:white;font-size:13px;}
+.sc-table tbody td{padding:11px 16px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.sc-table tbody tr:last-child td{border-bottom:none;}
+.sc-table tbody tr:hover td{background:var(--navy-light);}
+.sc-table tbody td:first-child{color:var(--text-muted);font-size:11px;font-weight:500;}
+.bar-w{display:flex;align-items:center;gap:7px;}
+.bar-t{flex:1;height:5px;background:var(--navy-light);border-radius:10px;overflow:hidden;min-width:50px;}
+.bar-f{height:100%;border-radius:10px;}
+.bv{font-size:11px;font-weight:600;color:var(--navy);min-width:22px;text-align:right;}
+.ck{color:var(--tq);font-size:15px;}
+.cx{color:#C0C8D8;font-size:15px;}
+
+/* MODULE GRID */
+.mod-grid{display:grid;gap:14px;margin-bottom:4px;}
+.mod-col{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.mod-h{padding:11px 16px;font-size:13px;font-weight:600;color:white;display:flex;align-items:center;gap:7px;}
+.mod-ic{width:22px;height:22px;background:rgba(255,255,255,.2);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.mi{padding:8px 16px;font-size:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;line-height:1.4;}
+.mi:last-child{border-bottom:none;}
+.mi-left{display:flex;align-items:center;gap:6px;}
+.mi .d{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.mi.y{color:var(--navy);}
+.mi.n{color:#C0C8D8;}
+.mi.n .d{background:#C0C8D8;}
+.mi-badge{font-size:10px;padding:1px 7px;border-radius:10px;flex-shrink:0;}
+.mb-dahil{background:var(--tq-light);color:var(--tq);}
+.mb-ekstra{background:#FFF8E7;color:#7A5500;}
+.mb-yok{background:var(--navy-light);color:var(--text-muted);}
+
+/* PRICE COMPARE */
+.price-comp-grid{display:grid;gap:14px;}
+.pc-col{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.pc-col-head{padding:12px 16px;font-size:13px;font-weight:600;color:white;display:flex;align-items:center;gap:7px;}
+.pc-row{padding:9px 16px;font-size:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.pc-row:last-child{border-bottom:none;}
+.pc-row-label{color:var(--text-muted);}
+.pc-row-val{font-weight:600;color:var(--navy);}
+
+/* PROS CONS */
+.pc-grid{display:grid;gap:14px;margin-bottom:4px;}
+.pc-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.pc-hd{padding:11px 16px;font-size:13px;font-weight:600;color:var(--navy);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.pc-ib{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0;}
+.pro,.con{padding:7px 16px;font-size:12px;display:flex;align-items:flex-start;gap:6px;border-bottom:1px solid var(--border);line-height:1.5;}
+.pro:last-child,.con:last-child{border-bottom:none;}
+.pro{color:#0A6B5E;}
+.pro::before{content:'+';color:var(--tq);font-weight:700;flex-shrink:0;}
+.con{color:#7A4F00;}
+.con::before{content:'−';color:#D08000;font-weight:700;flex-shrink:0;}
+
+/* EMPTY & CTA */
+.empty{text-align:center;padding:60px 20px;color:var(--text-muted);}
+.empty-icon{font-size:48px;margin-bottom:14px;}
+.empty h3{font-size:18px;font-weight:600;color:var(--navy);margin-bottom:8px;}
+.empty p{font-size:14px;line-height:1.6;}
+.comp-cta{background:var(--navy);border-radius:12px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;margin-top:22px;}
+.comp-cta h3{font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:4px;}
+.comp-cta h3 em{font-style:normal;color:var(--tq-mid);}
+.comp-cta p{font-size:13px;color:rgba(255,255,255,.6);}
+.ccb1{background:var(--tq);color:white;border:none;padding:10px 22px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.ccb2{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);padding:10px 22px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+
+@media(max-width:900px){.comp-main{padding:16px 20px;}}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="index.html" class="logo">ERP<span>Kıyasla</span></a>
   <ul class="nav-links">
     <li><a href="karsilastir.html" class="active">Karşılaştır</a></li>
-    <li><a href="#">ERP Rehberi</a></li>
-    <li><a href="#">Blog</a></li>
+    <li><a href="fiyatlar.html">Fiyatlar</a></li>
+    <li><a href="blog.html">Blog</a></li>
     <li><a href="#">Hakkımızda</a></li>
   </ul>
   <a href="karsilastir.html" class="nav-cta">Karşılaştırmaya Başla</a>
 </nav>
 
-<!-- PAGE HEADER -->
 <div class="page-header">
   <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> → <span style="color:var(--tq)">ERP Karşılaştırma</span></div>
   <h1>Yerli ERP Yazılımları Karşılaştırması</h1>
   <p>20+ ERP ürünü arasından seçin — ikili, üçlü veya dörtlü karşılaştırma yapın</p>
-  <div class="filter-bar">
-    <button class="filter-tab active">Genel Bakış</button>
-    <button class="filter-tab">Modüller</button>
-    <button class="filter-tab">Fiyat</button>
-    <button class="filter-tab">Yorumlar</button>
-  </div>
 </div>
 
-<!-- MAIN -->
 <div class="comp-main">
 
-  <!-- MODE -->
   <div class="mode-bar">
     <span class="mode-label">Karşılaştırma modu:</span>
     <button class="mode-btn sel" onclick="setMode(2)">İkili</button>
@@ -47,41 +146,64 @@
     <button class="mode-btn" onclick="setMode(4)">Dörtlü</button>
   </div>
 
-  <!-- PICKER -->
   <div class="picker-box">
     <div class="picker-title">
       Ürün Seç <span class="cnt-badge" id="cnt-badge">0 seçildi</span>
     </div>
     <div class="vendors" id="vendors-list"></div>
     <div class="picker-hint" id="picker-hint">
-      👆 Karşılaştırmak istediğiniz <span id="h-n">2</span> ürünü seçin
+      👆 Karşılaştırmak istediğiniz <span id="h-n" style="color:var(--tq);font-weight:500">2</span> ürünü seçin
     </div>
   </div>
 
-  <!-- EMPTY STATE -->
   <div id="empty-state" class="empty">
     <div class="empty-icon">⚖️</div>
     <h3>Karşılaştırmaya Başlayın</h3>
     <p>Yukarıdan ürünleri seçin.<br>İkili, üçlü veya dörtlü karşılaştırma yapabilirsiniz.</p>
   </div>
 
-  <!-- COMPARE PANEL -->
-  <div class="comp-panel" id="comp-panel">
-    <div class="sec-title">Genel Değerlendirme</div>
+  <div id="comp-panel" style="display:none">
+    <!-- VIEW TABS -->
+    <div class="view-tabs">
+      <button class="vt on" onclick="switchView('genel',this)">📊 Genel Bakış</button>
+      <button class="vt" onclick="switchView('modul',this)">🧩 Modüller</button>
+      <button class="vt" onclick="switchView('fiyat',this)">💰 Fiyat</button>
+      <button class="vt" onclick="switchView('proscons',this)">⚡ Artılar & Eksiler</button>
+    </div>
+
     <div class="comp-header-grid" id="header-grid"></div>
-    <div class="sec-title">Puan Karşılaştırması</div>
-    <table class="sc-table" id="score-table"></table>
-    <div class="sec-title">Modül Karşılaştırması</div>
-    <div class="mod-grid" id="mod-grid"></div>
-    <div class="sec-title">Artılar & Eksiler</div>
-    <div class="pc-grid" id="pc-grid"></div>
+
+    <!-- GENEL VIEW -->
+    <div id="view-genel">
+      <div class="sec-title">Puan Karşılaştırması</div>
+      <table class="sc-table" id="score-table"></table>
+    </div>
+
+    <!-- MODÜL VIEW -->
+    <div id="view-modul" style="display:none">
+      <div class="sec-title">Modül Karşılaştırması</div>
+      <div class="mod-grid" id="mod-grid"></div>
+    </div>
+
+    <!-- FİYAT VIEW -->
+    <div id="view-fiyat" style="display:none">
+      <div class="sec-title">Fiyat & Lisans Karşılaştırması</div>
+      <div class="price-comp-grid" id="price-grid"></div>
+    </div>
+
+    <!-- PROS/CONS VIEW -->
+    <div id="view-proscons" style="display:none">
+      <div class="sec-title">Artılar & Eksiler</div>
+      <div class="pc-grid" id="pc-grid"></div>
+    </div>
+
     <div class="comp-cta">
       <div>
         <h3>Hangi ERP <em>size uygun?</em></h3>
-        <p>Sektörünüze ve ölçeğinize göre ücretsiz öneri alın.</p>
+        <p>Fiyat rehberini inceleyin veya detaylı bilgi alın.</p>
       </div>
-      <div class="comp-cta-btns">
-        <button class="ccb2">Tüm ERP'leri Gör</button>
+      <div style="display:flex;gap:10px;">
+        <button class="ccb2" onclick="location.href='fiyatlar.html'">Fiyat Rehberi</button>
         <button class="ccb1">Ücretsiz Danışmanlık →</button>
       </div>
     </div>
@@ -89,7 +211,6 @@
 
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-logo">ERP<span>Kıyasla</span></div>
   <ul class="footer-links">
@@ -97,10 +218,180 @@
     <li><a href="#">Kullanım Şartları</a></li>
     <li><a href="#">İletişim</a></li>
   </ul>
-  <div class="footer-copy">© 2025 erpkiyasla.com</div>
+  <div class="footer-copy">© 2026 erpkiyasla.com</div>
 </footer>
 
 <script src="erp-data.js"></script>
-<script src="compare.js"></script>
+<script>
+let mode = 2, chosen = [], currentView = 'genel';
+
+function setMode(n) {
+  mode = n; chosen = [];
+  document.querySelectorAll('.mode-btn').forEach((b,i)=>b.classList.toggle('sel',i===n-2));
+  document.getElementById('h-n').textContent = n;
+  document.querySelectorAll('.prod-chip').forEach(c=>c.classList.remove('chosen'));
+  document.getElementById('cnt-badge').textContent = '0 seçildi';
+  document.getElementById('comp-panel').style.display = 'none';
+  document.getElementById('empty-state').style.display = 'block';
+}
+
+function switchView(view, btn) {
+  currentView = view;
+  document.querySelectorAll('.vt').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  ['genel','modul','fiyat','proscons'].forEach(v=>{
+    document.getElementById('view-'+v).style.display = v===view ? 'block' : 'none';
+  });
+}
+
+function toggleProduct(id) {
+  const chip = document.querySelector(`[data-id="${id}"]`);
+  if (chosen.includes(id)) {
+    chosen = chosen.filter(x=>x!==id);
+    chip.classList.remove('chosen');
+  } else {
+    if (chosen.length >= mode) {
+      const first = chosen.shift();
+      document.querySelector(`[data-id="${first}"]`).classList.remove('chosen');
+    }
+    chosen.push(id);
+    chip.classList.add('chosen');
+  }
+  document.getElementById('cnt-badge').textContent = `${chosen.length} seçildi`;
+  if (chosen.length === mode) renderComparison();
+  else {
+    document.getElementById('comp-panel').style.display = 'none';
+    document.getElementById('empty-state').style.display = 'block';
+  }
+}
+
+function getProduct(id) {
+  for (const v of VENDORS) for (const p of v.products) if (p.id===id) return {...p, vcolor:v.color};
+  return null;
+}
+
+function renderStars(s) {
+  return s.replace(/★/g,'<span style="color:#F0A500">★</span>').replace(/½/g,'<span style="color:#F0A500;font-size:10px">½</span>');
+}
+
+function renderComparison() {
+  const prods = chosen.map(id=>getProduct(id));
+  const n = prods.length;
+  document.getElementById('empty-state').style.display = 'none';
+  const panel = document.getElementById('comp-panel');
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'start'});
+
+  // Header
+  const hg = document.getElementById('header-grid');
+  hg.style.gridTemplateColumns = `repeat(${n},1fr)`;
+  const best = Math.max(...prods.map(p=>p.skor));
+  hg.innerHTML = prods.map(p=>`
+    <div class="erp-header-card ${p.skor===best?'top':''}">
+      ${p.skor===best?'<div class="top-badge">En Yüksek Puan</div>':''}
+      <div class="ehc-icon" style="background:${p.vcolor}">${p.short}</div>
+      <div class="ehc-name">${p.label}</div>
+      <div class="ehc-vendor">${p.vendor}</div>
+      <div class="ehc-score">${p.skor}<span>/10</span></div>
+      <div class="ehc-stars">${renderStars(p.stars)}</div>
+      <div class="ehc-tag">${p.olcek}</div>
+      <div class="ehc-tag">${p.bulut?'☁️ Bulut':'🖥 On-premise'}</div>
+    </div>`).join('');
+
+  // GENEL — Score table
+  const cats = ['kullanim','fiyat','entegrasyon','mobil','destek'];
+  const catLabels = ['Kullanım Kolaylığı','Fiyat / Performans','Entegrasyon Gücü','Mobil / Bulut','Teknik Destek'];
+  const st = document.getElementById('score-table');
+  st.innerHTML = `<thead><tr><th>Kategori</th>${prods.map(p=>`<th>${p.label}</th>`).join('')}</tr></thead>
+  <tbody>
+    ${cats.map((c,ci)=>`<tr><td>${catLabels[ci]}</td>${prods.map(p=>`
+      <td><div class="bar-w"><div class="bar-t"><div class="bar-f" style="width:${p.puan[c]*10}%;background:${p.vcolor}"></div></div><span class="bv">${p.puan[c]}</span></div></td>`).join('')}</tr>`).join('')}
+    <tr><td>e-Fatura / e-Arşiv</td>${prods.map(p=>`<td>${p.moduller.some(m=>m.includes('e-Fatura')||m.includes('e-Dönüşüm'))?'<span class="ck">✓</span>':'<span class="cx">✗</span>'}</td>`).join('')}</tr>
+    <tr><td>Native Bulut</td>${prods.map(p=>`<td>${p.bulut?'<span class="ck">✓</span>':'<span class="cx">✗</span>'}</td>`).join('')}</tr>
+    <tr><td>Hedef Kitle</td>${prods.map(p=>`<td style="font-size:11px">${p.olcek}</td>`).join('')}</tr>
+    <tr><td>Kurulum Tipi</td>${prods.map(p=>`<td style="font-size:11px">${p.tip}</td>`).join('')}</tr>
+  </tbody>`;
+
+  // MODÜL grid
+  const mg = document.getElementById('mod-grid');
+  mg.style.gridTemplateColumns = `repeat(${n},1fr)`;
+  const allModules = [...new Set(prods.flatMap(p=>[...p.moduller,...(p.nomod||[])]))];
+  mg.innerHTML = prods.map(p=>`
+    <div class="mod-col">
+      <div class="mod-h" style="background:${p.vcolor}"><div class="mod-ic">${p.short}</div>${p.label}</div>
+      ${allModules.map(m=>{
+        const has = p.moduller.includes(m);
+        const no = (p.nomod||[]).includes(m);
+        if (!has && !no) return '';
+        return `<div class="mi ${has?'y':'n'}">
+          <div class="mi-left"><div class="d" style="background:${has?p.vcolor:'#C0C8D8'}"></div>${m}</div>
+          <span class="mi-badge ${has?'mb-dahil':'mb-yok'}">${has?'Dahil':'Yok'}</span>
+        </div>`;
+      }).join('')}
+    </div>`).join('');
+
+  // FİYAT grid
+  const pg = document.getElementById('price-grid');
+  pg.style.gridTemplateColumns = `repeat(${n},1fr)`;
+  const priceData = {
+    'logo-tiger': [['Ana paket (1 kul.)','350.100 ₺/yıl'],['+2 kul. artırım','290.700 ₺'],['+5 kul. artırım','504.700 ₺'],['Lisans modeli','Yıllık (LEM)'],['1. yıl LEM','Ücretsiz']],
+    'logo-go': [['Başlangıç (1 kul.)','~85.000 ₺/yıl'],['Lisans modeli','Yıllık (LEM)'],['1. yıl LEM','Ücretsiz'],['e-Fatura','Ek ücret']],
+    'logo-wings': [['Fiyatlandırma','Teklif alın'],['Model','Yıllık abonelik'],['Kullanıcı başına','Evet']],
+    'logo-netsis': [['Fiyatlandırma','Teklif alın'],['Model','Yıllık LEM'],['Segment','Orta-Büyük']],
+    'logo-jplatform': [['Fiyatlandırma','Teklif alın'],['Model','Web tabanlı'],['Bayilik desteği','Evet']],
+    'wolvox': [['Başlangıç','~45.000 ₺'],['Model','Tek seferlik'],['Minor güncelleme','Ücretsiz'],['Major versiyon','Ücretli']],
+    'octoplus': [['Başlangıç','~15.000 ₺'],['Model','Tek seferlik'],['Minor güncelleme','Ücretsiz']],
+    'dia': [['Model','Aylık SaaS'],['IT yatırımı','Sıfır'],['Sunucu','Sıfır'],['Fiyat','Teklif alın']],
+    'workcube': [['Model','Bulut / On-premise'],['Kullanıcı sınırı','Sınırsız'],['Fiyat','Teklif alın']],
+    'nebim-v3': [['Segment','Perakende'],['Model','Lisans'],['Fiyat','Teklif alın']],
+    'liox': [['Model','Aylık SaaS'],['Bulut','Native'],['Fiyat','Teklif alın']],
+    'canias': [['Model','On-prem/Bulut/Hibrit'],['Segment','Büyük'],['Fiyat','Proje bazlı — yüksek']],
+    'mikro-run': [['Başlangıç','~100.000 ₺'],['Model','Lisans + bakım'],['Deneyim','35+ yıl']],
+    'mikro-jump': [['Başlangıç','~60.000 ₺'],['Model','Lisans + bakım'],['Segment','KOBİ']],
+    'mikro-fly': [['Başlangıç','~30.000 ₺'],['Model','Lisans'],['Segment','Küçük']],
+    'uyum-erp': [['Fiyat','Teklif alın'],['Model','Lisans + bakım']],
+    'erp12': [['Model','Aylık SaaS'],['Bulut','Native'],['Fiyat','Teklif alın']],
+    'vega': [['Başlangıç','~50.000 ₺'],['Model','Lisans'],['Bulut seçeneği','Mevcut']],
+    'abas': [['Model','On-prem / Bulut'],['Segment','Orta-Büyük'],['Fiyat','Yüksek — teklif alın']],
+  };
+  pg.innerHTML = prods.map(p=>{
+    const rows = priceData[p.id] || [['Fiyat','Teklif alın'],['Model','—']];
+    return `<div class="pc-col">
+      <div class="pc-col-head" style="background:${p.vcolor}"><div class="mod-ic">${p.short}</div>${p.label}</div>
+      ${rows.map(([l,v])=>`<div class="pc-row"><span class="pc-row-label">${l}</span><span class="pc-row-val">${v}</span></div>`).join('')}
+      <div class="pc-row"><span class="pc-row-label"></span><a href="fiyatlar.html" style="font-size:11px;color:var(--tq);">Detaylı fiyat →</a></div>
+    </div>`;
+  }).join('');
+
+  // PROS/CONS
+  const pcg = document.getElementById('pc-grid');
+  pcg.style.gridTemplateColumns = `repeat(${n},1fr)`;
+  pcg.innerHTML = prods.map(p=>`
+    <div class="pc-card">
+      <div class="pc-hd"><div class="pc-ib" style="background:${p.vcolor}">${p.short}</div>${p.label}</div>
+      ${p.pros.map(x=>`<div class="pro">${x}</div>`).join('')}
+      ${p.cons.map(x=>`<div class="con">${x}</div>`).join('')}
+    </div>`).join('');
+
+  // Reset to current view
+  switchView(currentView, document.querySelector('.vt.on'));
+}
+
+function buildPicker() {
+  const vl = document.getElementById('vendors-list');
+  VENDORS.forEach(v=>{
+    const row = document.createElement('div');
+    row.className = 'vendor-row';
+    row.innerHTML = `<div class="vendor-name">${v.name}</div>
+      <div class="products-row">${v.products.map(p=>`
+        <div class="prod-chip" data-id="${p.id}" onclick="toggleProduct('${p.id}')">
+          <span class="dot" style="background:${v.color}"></span>${p.label}
+        </div>`).join('')}</div>`;
+    vl.appendChild(row);
+  });
+}
+
+buildPicker();
+</script>
 </body>
 </html>

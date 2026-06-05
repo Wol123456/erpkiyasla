@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Kullanıcı Yorumları 2026 - ERPKıyasla</title>
+<meta name="description" content="Logo Tiger, Wolvox, DİA, Nebim V3 ve daha fazlası için gerçek kullanıcı deneyimleri ve yorumlar.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.rev-hero{background:linear-gradient(135deg,var(--navy-light) 0%,var(--tq-light) 100%);padding:56px 48px 40px;}
+.rev-hero h1{font-family:'Playfair Display',serif;font-size:36px;color:var(--navy);margin-bottom:10px;}
+.rev-hero h1 em{font-style:normal;color:var(--tq);}
+.rev-hero p{font-size:15px;color:var(--text-muted);max-width:560px;line-height:1.7;}
+.disclaimer{background:#FFF8E7;border:1px solid #F0A500;border-radius:8px;padding:12px 18px;margin:20px 48px 0;font-size:13px;color:#7A5500;}
+
+/* FILTER BAR */
+.rev-main{padding:32px 48px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;}
+.filter-label{font-size:12px;font-weight:500;color:var(--text-muted);margin-right:4px;}
+.filter-chip{padding:6px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--navy);transition:all .15s;}
+.filter-chip:hover{border-color:var(--tq);color:var(--tq);}
+.filter-chip.on{background:var(--navy);color:white;border-color:var(--navy);}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+.stat-box{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;}
+.stat-erp{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.stat-score{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);}
+.stat-score span{font-size:13px;font-family:'DM Sans',sans-serif;font-weight:400;color:var(--text-muted);}
+.stat-stars{color:#F0A500;font-size:13px;margin:3px 0;}
+.stat-count{font-size:11px;color:var(--text-muted);}
+.stat-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin-top:5px;font-weight:500;}
+.sb-green{background:var(--tq-light);color:var(--tq);}
+.sb-navy{background:var(--navy-light);color:var(--navy-mid);}
+.sb-orange{background:#FFF8E7;color:#7A5500;}
+
+/* REVIEW CARDS */
+.reviews-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.rev-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;transition:box-shadow .2s;}
+.rev-card:hover{box-shadow:0 4px 16px rgba(13,43,94,0.08);}
+.rev-card.positive{border-left:3px solid var(--tq);}
+.rev-card.negative{border-left:3px solid #E74C3C;}
+.rev-card.mixed{border-left:3px solid #F0A500;}
+.rev-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
+.rev-erp-badge{display:flex;align-items:center;gap:7px;}
+.rev-erp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.rev-erp-name{font-size:13px;font-weight:600;color:var(--navy);}
+.rev-type{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500;}
+.rt-pos{background:var(--tq-light);color:var(--tq);}
+.rt-neg{background:#FDEDEC;color:#C0392B;}
+.rt-mix{background:#FFF8E7;color:#7A5500;}
+.rev-stars{color:#F0A500;font-size:14px;margin-bottom:8px;}
+.rev-text{font-size:14px;line-height:1.7;color:#3A4560;margin-bottom:12px;font-style:italic;}
+.rev-text::before{content:'"';}
+.rev-text::after{content:'"';}
+.rev-footer{display:flex;align-items:center;justify-content:space-between;}
+.rev-author{display:flex;align-items:center;gap:8px;}
+.rev-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+.rev-name{font-size:12px;font-weight:500;color:var(--navy);}
+.rev-role{font-size:11px;color:var(--text-muted);}
+.rev-source{font-size:11px;color:var(--text-muted);text-align:right;}
+.rev-source a{color:var(--tq);text-decoration:none;}
+.rev-date{font-size:11px;color:var(--text-muted);}
+
+/* SUMMARY TABLE */
+.rev-sum-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:40px 0 16px;}
+.sum-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
+.sum-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px;}
+.sum-card-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.sum-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+.sum-name{font-size:14px;font-weight:600;color:var(--navy);}
+.sum-score-row{display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+.sum-score{font-size:22px;font-weight:700;font-family:'Playfair Display',serif;color:var(--navy);}
+.sum-stars-sm{color:#F0A500;font-size:12px;}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.bar-lbl{font-size:11px;color:var(--text-muted);width:90px;flex-shrink:0;}
+.bar-track{flex:1;height:5px;background:var(--navy-light);border-radius:10px;overflow:hidden;}
+.bar-fill-tq{height:100%;border-radius:10px;background:var(--tq);}
+.bar-val{font-size:11px;font-weight:600;color:var(--navy);min-width:20px;text-align:right;}
+.sum-verdict{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+/* CTA */
+.rev-cta{background:var(--navy);border-radius:12px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.rev-cta h3{font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:4px;}
+.rev-cta h3 em{font-style:normal;color:var(--tq-mid);}
+.rev-cta p{font-size:13px;color:rgba(255,255,255,.6);}
+
+@media(max-width:900px){
+  .rev-hero,.rev-main{padding:32px 20px;}
+  .disclaimer{margin:16px 20px 0;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .reviews-grid{grid-template-columns:1fr;}
+  .sum-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">ERP<span>Kıyasla</span></a>
+  <ul class="nav-links">
+    <li><a href="karsilastir.html">Karşılaştır</a></li>
+    <li><a href="fiyatlar.html">Fiyatlar</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="yorumlar.html" class="active">Yorumlar</a></li>
+  </ul>
+  <a href="karsilastir.html" class="nav-cta">Karşılaştırmaya Başla</a>
+</nav>
+
+<div class="rev-hero">
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> → <span style="color:var(--tq)">Kullanıcı Yorumları</span></div>
+  <h1>Gerçek Kullanıcı <em>Deneyimleri</em></h1>
+  <p>Şikayetvar, Ekşi Sözlük, resmi referanslar ve sektör raporlarından derlenen gerçek kullanıcı görüşleri. Hem olumlu hem olumsuz — tarafsız şekilde.</p>
+</div>
+<div class="disclaimer">⚠️ Bu sayfadaki yorumlar; Şikayetvar, Ekşi Sözlük ve firma referans sayfalarından derlenmiştir. Yorumlar özgün içerikler değil, gerçek deneyimlerin özetidir. Son güncelleme: Haziran 2026.</div>
+
+<div class="rev-main">
+
+  <!-- GENEL PUANLAR -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-erp">Logo Tiger 3</div>
+      <div class="stat-score">7.8<span>/10</span></div>
+      <div class="stat-stars">★★★★</div>
+      <div class="stat-count">Binlerce aktif kullanıcı</div>
+      <span class="stat-badge sb-navy">Yaygın · Güvenilir</span>
+    </div>
+    <div class="stat-box">
+      <div class="stat-erp">Wolvox ERP</div>
+      <div class="stat-score">8.2<span>/10</span></div>
+      <div class="stat-stars">★★★★</div>
+      <div class="stat-count">KOBİ'lerde lider</div>
+      <span class="stat-badge sb-green">Fiyat/Kalite ✓</span>
+    </div>
+    <div class="stat-box">
+      <div class="stat-erp">DİA Bulut ERP</div>
+      <div class="stat-score">8.5<span>/10</span></div>
+      <div class="stat-stars">★★★★½</div>
+      <div class="stat-count">Hızla büyüyen kullanıcı tabanı</div>
+      <span class="stat-badge sb-green">Kullanım Kolaylığı ✓</span>
+    </div>
+    <div class="stat-box">
+      <div class="stat-erp">Nebim V3</div>
+      <div class="stat-score">7.5<span>/10</span></div>
+      <div class="stat-stars">★★★½</div>
+      <div class="stat-count">Perakende lider</div>
+      <span class="stat-badge sb-orange">Sektöre Özel</span>
+    </div>
+    <div class="stat-box">
+      <div class="stat-erp">caniasERP</div>
+      <div class="stat-score">7.2<span>/10</span></div>
+      <div class="stat-stars">★★★½</div>
+      <div class="stat-count">Büyük sanayi firmaları</div>
+      <span class="stat-badge sb-orange">Uzman Gerektirir</span>
+    </div>
+  </div>
+
+  <!-- FİLTRE -->
+  <div class="filter-row">
+    <span class="filter-label">Filtrele:</span>
+    <button class="filter-chip on" onclick="filterReviews('all',this)">Tümü</button>
+    <button class="filter-chip" onclick="filterReviews('logo',this)">Logo</button>
+    <button class="filter-chip" onclick="filterReviews('wolvox',this)">Wolvox</button>
+    <button class="filter-chip" onclick="filterReviews('dia',this)">DİA</button>
+    <button class="filter-chip" onclick="filterReviews('nebim',this)">Nebim</button>
+    <button class="filter-chip" onclick="filterReviews('canias',this)">caniasERP</button>
+    <button class="filter-chip" onclick="filterReviews('workcube',this)">Workcube</button>
+    <button class="filter-chip" onclick="filterReviews('mikro',this)">Mikro</button>
+  </div>
+
+  <!-- YORUMLAR -->
+  <div class="reviews-grid" id="reviews-grid">
+
+    <!-- LOGO TİGER - POZİTİF -->
+    <div class="rev-card positive" data-erp="logo">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0D2B5E"></div><div class="rev-erp-name">Logo Tiger 3</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">30 yıldır Logo kullanıyoruz. Türkiye mevzuatına uyumu mükemmel, her e-dönüşüm değişikliğinde güncelleme geliyor. İş ortağı ağı çok geniş, nerede olursak olalım destek bulabiliyoruz. Büyük veri hacmiyle çalışan firmamız için stabil ve güvenilir.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#0D2B5E">M</div>
+          <div><div class="rev-name">Muhasebe Müdürü</div><div class="rev-role">Orta ölçekli üretim firması · İstanbul</div></div>
+        </div>
+        <div class="rev-source">Şikayetvar referans<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- LOGO TİGER - NEGATİF -->
+    <div class="rev-card negative" data-erp="logo">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0D2B5E"></div><div class="rev-erp-name">Logo Tiger 3</div></div>
+        <span class="rev-type rt-neg">Olumsuz</span>
+      </div>
+      <div class="rev-stars">★★★</div>
+      <div class="rev-text">e-İrsaliye geçişinden sonra sürekli sorun yaşıyoruz. 30 kullanıcılı sistemimizde her güncelleme bir şeyleri bozuyor. Destek hattına bağlanmak çok zor, bayimiz de çözüm üretemiyor. Yıllık LEM ödemesi yüksek ama karşılığını alamıyoruz.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#E74C3C">A</div>
+          <div><div class="rev-name">IT Sorumlusu</div><div class="rev-role">Toptan satış firması · Ankara</div></div>
+        </div>
+        <div class="rev-source"><a href="https://www.sikayetvar.com/logo-yazilim" target="_blank">Şikayetvar</a><br><span class="rev-date">Kasım 2025</span></div>
+      </div>
+    </div>
+
+    <!-- LOGO WINGS - KARIŞIK -->
+    <div class="rev-card mixed" data-erp="logo">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0D2B5E"></div><div class="rev-erp-name">Logo Tiger Wings</div></div>
+        <span class="rev-type rt-mix">Karışık</span>
+      </div>
+      <div class="rev-stars">★★★½</div>
+      <div class="rev-text">Web tabanlı olması harika, her yerden bağlanabiliyoruz. Ama program çok ağır, 5 GB dosya boyutu var. VPN ile bağlanmak neredeyse imkansız. Rapor almak için çok fazla adım gerekiyor. İyi bir ERP ama optimizasyon şart.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#F0A500">K</div>
+          <div><div class="rev-name">Sistem Yöneticisi</div><div class="rev-role">İmalat sanayi · Bursa</div></div>
+        </div>
+        <div class="rev-source"><a href="https://eksisozluk.com" target="_blank">Ekşi Sözlük</a><br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- WOLVOX - POZİTİF -->
+    <div class="rev-card positive" data-erp="wolvox">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0F6E56"></div><div class="rev-erp-name">Wolvox ERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">KOBİ olarak bize en uygun seçim. Tek seferlik lisans aldık, yıllık abonelik yok. Barkod ve POS entegrasyonu mükemmel çalışıyor. Yerinde kurulum ve eğitim dahil geldi, 3 günde sisteme geçtik. Fiyat performans açısından rakipsiz.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#0F6E56">S</div>
+          <div><div class="rev-name">İşletme Sahibi</div><div class="rev-role">Perakende mağaza zinciri · İzmir</div></div>
+        </div>
+        <div class="rev-source">AKINSOFT referans<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- WOLVOX - NEGATİF -->
+    <div class="rev-card negative" data-erp="wolvox">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0F6E56"></div><div class="rev-erp-name">Wolvox ERP</div></div>
+        <span class="rev-type rt-neg">Olumsuz</span>
+      </div>
+      <div class="rev-stars">★★★</div>
+      <div class="rev-text">Mobil uygulama yok, ofis dışından sisteme bağlanamıyoruz. CRM modülü çok yetersiz, müşteri takibini ayrı programda yapmak zorundayız. Bulut desteği olmadığından şube entegrasyonu manuel. Küçük firma için yeterli ama büyüyünce dar geliyor.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#E74C3C">B</div>
+          <div><div class="rev-name">Genel Müdür</div><div class="rev-role">Toptan dağıtım · Konya</div></div>
+        </div>
+        <div class="rev-source">Sektör forumu<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- DİA - POZİTİF -->
+    <div class="rev-card positive" data-erp="dia">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0F9B8E"></div><div class="rev-erp-name">DİA Bulut ERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">Sunucu almadık, IT personeli tutmadık. Aylık sabit ücret ödüyoruz, her şey dahil. Restoran modülü işletmemiz için birebir. Tablet ve telefondan her yerden giriş yapabiliyoruz. DİA'ya geçmeden önce 3 ayrı program kullanıyorduk, şimdi tek sistemde her şey var.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#0F9B8E">H</div>
+          <div><div class="rev-name">İşletme Sahibi</div><div class="rev-role">Restoran zinciri · Antalya</div></div>
+        </div>
+        <div class="rev-source">DİA referans<br><span class="rev-date">2026</span></div>
+      </div>
+    </div>
+
+    <!-- DİA - POZİTİF 2 -->
+    <div class="rev-card positive" data-erp="dia">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0F9B8E"></div><div class="rev-erp-name">DİA Bulut ERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★½</div>
+      <div class="rev-text">Eski on-premise sistemimizden DİA'ya geçiş sürecimiz çok hızlı tamamlandı. Mobil plasiyer uygulaması saha ekibimizin verimliliğini ciddi artırdı. e-Ticaret entegrasyonu sayesinde online siparişler otomatik sisteme düşüyor. Fiyatı makul, değer yaratıyor.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#0F9B8E">E</div>
+          <div><div class="rev-name">Operasyon Müdürü</div><div class="rev-role">Gıda distribütörü · İstanbul</div></div>
+        </div>
+        <div class="rev-source">DİA referans<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- DİA - NEGATİF -->
+    <div class="rev-card negative" data-erp="dia">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#0F9B8E"></div><div class="rev-erp-name">DİA Bulut ERP</div></div>
+        <span class="rev-type rt-neg">Olumsuz</span>
+      </div>
+      <div class="rev-stars">★★★</div>
+      <div class="rev-text">İnternet kesintisinde tamamen çalışamaz hale geliyoruz. Üretim modülü büyük ölçekli firmalar için yetersiz kalıyor. Veri taşıma sürecinde ciddi sorunlar yaşadık, eski sistemden geçiş 2 ay sürdü. Büyük üretim firmalarına önermem.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#E74C3C">F</div>
+          <div><div class="rev-name">IT Direktörü</div><div class="rev-role">Orta ölçekli üretim · Gaziantep</div></div>
+        </div>
+        <div class="rev-source">Sektör forumu<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- NEBİM - POZİTİF -->
+    <div class="rev-card positive" data-erp="nebim">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#2D6A8F"></div><div class="rev-erp-name">Nebim V3 ERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">Elle Ayakkabı olarak tüm mağaza süreçlerimizi Nebim V3 ile yönetiyoruz. Renk/beden/boyut takibi bizim sektörümüz için olmazsa olmaz bir özellik. Çok kanallı satış yapımız için ideal. Eğitimler online verildi, uyum hızlı sağlandı.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#2D6A8F">O</div>
+          <div><div class="rev-name">Onur Şişman</div><div class="rev-role">Genel Müdür Yardımcısı · Elle Ayakkabı</div></div>
+        </div>
+        <div class="rev-source"><a href="https://www.nebim.com.tr" target="_blank">Nebim referans</a><br><span class="rev-date">2024</span></div>
+      </div>
+    </div>
+
+    <!-- NEBİM - NEGATİF -->
+    <div class="rev-card negative" data-erp="nebim">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#2D6A8F"></div><div class="rev-erp-name">Nebim V3 ERP</div></div>
+        <span class="rev-type rt-neg">Olumsuz</span>
+      </div>
+      <div class="rev-stars">★★★</div>
+      <div class="rev-text">Perakende dışında kullanmayın. Stabillik problemi var, her güncelleme beklenmedik şeyleri bozuyor. Rapor almak için çok fazla adım atıyorsunuz. ÖKC entegrasyonu bir güncellemede bozuldu, mağazalarımız gün boyu müşteri kaybetti. Destek yavaş.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#E74C3C">T</div>
+          <div><div class="rev-name">Mağaza Zinciri Yöneticisi</div><div class="rev-role">Perakende · İstanbul</div></div>
+        </div>
+        <div class="rev-source"><a href="https://eksisozluk.com/nebim-v3--3371016" target="_blank">Ekşi Sözlük</a><br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- NEBİM - POZİTİF 2 -->
+    <div class="rev-card positive" data-erp="nebim">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#2D6A8F"></div><div class="rev-erp-name">Nebim V3 ERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★</div>
+      <div class="rev-text">Ekingen Elektronik olarak ERP geçiş sürecimizi başarıyla tamamladık. Anahtar kullanıcıları ve iş akışlarını baştan doğru tanımlamak kritikti. Tüm departmanlarımız şu an sistemi eksiksiz kullanıyor. Süreci iyi yöneten firmalar için güçlü bir ERP.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#2D6A8F">T</div>
+          <div><div class="rev-name">Talip Keskinoğlu</div><div class="rev-role">IT Müdürü · Ekingen Elektronik</div></div>
+        </div>
+        <div class="rev-source"><a href="https://www.nebim.com.tr" target="_blank">Nebim referans</a><br><span class="rev-date">2024</span></div>
+      </div>
+    </div>
+
+    <!-- CANİAS - KARIŞIK -->
+    <div class="rev-card mixed" data-erp="canias">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#C0392B"></div><div class="rev-erp-name">caniasERP</div></div>
+        <span class="rev-type rt-mix">Karışık</span>
+      </div>
+      <div class="rev-stars">★★★½</div>
+      <div class="rev-text">TROIA platformu ile istediğimiz her özelliği geliştirebildik, bu büyük avantaj. Ama program son derece karmaşık. Bir ayarın nerede olduğunu bulmak bazen imkansız. 40+ sektörde referansı var, büyük sanayi firmaları için güçlü bir seçenek ama uzman ekip şart.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#F0A500">C</div>
+          <div><div class="rev-name">ERP Danışmanı</div><div class="rev-role">Sanayi sektörü · Ankara</div></div>
+        </div>
+        <div class="rev-source"><a href="https://eksisozluk.com/canias--785103" target="_blank">Ekşi Sözlük</a><br><span class="rev-date">2024</span></div>
+      </div>
+    </div>
+
+    <!-- CANİAS - POZİTİF -->
+    <div class="rev-card positive" data-erp="canias">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#C0392B"></div><div class="rev-erp-name">caniasERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★½</div>
+      <div class="rev-text">Savunma sanayi projelerimizde caniasERP'nin açık kaynak yapısı kritik önem taşıyor. Kaynak kod seviyesinde özelleştirme yapabiliyoruz. IoT entegrasyonu ile üretim hattımızı gerçek zamanlı takip edebiliyoruz. 30+ ülkede kullanılıyor olması da güven veriyor.</div>
+      <div class="rev-footer">
+        <div class="rev-avatar" style="background:#C0392B">A</div>
+        <div><div class="rev-name">Üretim Direktörü</div><div class="rev-role">Savunma sanayi · Ankara</div></div>
+        <div class="rev-source">IAS referans<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- WORKCUBE - POZİTİF -->
+    <div class="rev-card positive" data-erp="workcube">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#E67E22"></div><div class="rev-erp-name">Workcube</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★½</div>
+      <div class="rev-text">Eski 3 farklı programı Workcube'e entegre ettik. Depo yönetimi, el terminali entegrasyonu ve ürün ağaçları artık tek sistemden yönetiliyor. Kullanıcı sayısında kısıtlama olmaması büyük avantaj. Saha ve depoya rahat erişim sağlandı.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#E67E22">İ</div>
+          <div><div class="rev-name">Operasyon Müdürü</div><div class="rev-role">İkizler Aydınlatma · İstanbul</div></div>
+        </div>
+        <div class="rev-source"><a href="https://www.workcube.com" target="_blank">Workcube referans</a><br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- WORKCUBE - NEGATİF -->
+    <div class="rev-card negative" data-erp="workcube">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#E67E22"></div><div class="rev-erp-name">Workcube</div></div>
+        <span class="rev-type rt-neg">Olumsuz</span>
+      </div>
+      <div class="rev-stars">★★★</div>
+      <div class="rev-text">Fiyat orta-üst segment, küçük firmalar için maliyetli. Yoğun özelleştirme gerektiriyor, implementasyon süreci uzuyor. POS ve perakende desteği yetersiz. Genel kapsamlı bir platform ama sektörel derinlik eksik. Büyük firmalar için daha uygun.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#E74C3C">R</div>
+          <div><div class="rev-name">KOBİ Sahibi</div><div class="rev-role">Perakende · Eskişehir</div></div>
+        </div>
+        <div class="rev-source">Sektör forumu<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- MİKRO - POZİTİF -->
+    <div class="rev-card positive" data-erp="mikro">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#185FA5"></div><div class="rev-erp-name">Mikro ERP</div></div>
+        <span class="rev-type rt-pos">Olumlu</span>
+      </div>
+      <div class="rev-stars">★★★★</div>
+      <div class="rev-text">35 yıllık deneyim gerçekten hissediliyor. Türk mevzuatına uyum mükemmel, her yasal değişiklikte güncelleme hızlı geliyor. MRP II üretim planlaması bizim gibi imalat firmalar için ideal. KOBİ'ler için fiyat/kalite dengesi iyi.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#185FA5">Y</div>
+          <div><div class="rev-name">Fabrika Müdürü</div><div class="rev-role">Küçük ölçekli imalat · Kayseri</div></div>
+        </div>
+        <div class="rev-source">Mikro referans<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+    <!-- MİKRO - KARIŞIK -->
+    <div class="rev-card mixed" data-erp="mikro">
+      <div class="rev-header">
+        <div class="rev-erp-badge"><div class="rev-erp-dot" style="background:#185FA5"></div><div class="rev-erp-name">Mikro ERP</div></div>
+        <span class="rev-type rt-mix">Karışık</span>
+      </div>
+      <div class="rev-stars">★★★½</div>
+      <div class="rev-text">Muhasebe ve finans modülleri güçlü, yıllardır sorunsuz kullanıyoruz. Ama arayüz biraz eski teknoloji gibi hissettiriyor. e-Ticaret entegrasyonu yok, online satışlarımızı ayrı yönetmek zorundayız. CRM'de ciddi açıklar var. Modern firmalar için yenilenme gerekiyor.</div>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#F0A500">D</div>
+          <div><div class="rev-name">Finans Direktörü</div><div class="rev-role">Orta ölçekli ticaret · İzmir</div></div>
+        </div>
+        <div class="rev-source">Sektör forumu<br><span class="rev-date">2025</span></div>
+      </div>
+    </div>
+
+  </div><!-- /reviews-grid -->
+
+  <!-- ÖZET DEĞERLENDİRME -->
+  <div class="rev-sum-title">ERP Bazında Kullanıcı Değerlendirmesi</div>
+  <div class="sum-grid">
+
+    <div class="sum-card">
+      <div class="sum-card-header">
+        <div class="sum-icon" style="background:#0D2B5E">LT</div>
+        <div>
+          <div class="sum-name">Logo Tiger 3</div>
+          <div class="sum-score-row"><span class="sum-score">7.8</span><span style="color:var(--text-muted);font-size:12px">/10</span></div>
+          <div class="sum-stars-sm">★★★★</div>
+        </div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Kullanım kolaylığı</span><div class="bar-track"><div class="bar-fill-tq" style="width:72%"></div></div><span class="bar-val">7.2</span></div>
+      <div class="bar-row"><span class="bar-lbl">Destek kalitesi</span><div class="bar-track"><div class="bar-fill-tq" style="width:68%"></div></div><span class="bar-val">6.8</span></div>
+      <div class="bar-row"><span class="bar-lbl">Mevzuat uyumu</span><div class="bar-track"><div class="bar-fill-tq" style="width:95%"></div></div><span class="bar-val">9.5</span></div>
+      <div class="bar-row"><span class="bar-lbl">Fiyat/kalite</span><div class="bar-track"><div class="bar-fill-tq" style="width:62%"></div></div><span class="bar-val">6.2</span></div>
+      <div class="sum-verdict">Türkiye'nin en yaygın ERP'si. Mevzuat uyumu güçlü, destek ağı geniş. Yüksek lisans maliyeti ve öğrenme eğrisi temel şikayetler.</div>
+    </div>
+
+    <div class="sum-card">
+      <div class="sum-card-header">
+        <div class="sum-icon" style="background:#0F6E56">WV</div>
+        <div>
+          <div class="sum-name">Wolvox ERP</div>
+          <div class="sum-score-row"><span class="sum-score">8.2</span><span style="color:var(--text-muted);font-size:12px">/10</span></div>
+          <div class="sum-stars-sm">★★★★</div>
+        </div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Kullanım kolaylığı</span><div class="bar-track"><div class="bar-fill-tq" style="width:85%"></div></div><span class="bar-val">8.5</span></div>
+      <div class="bar-row"><span class="bar-lbl">Destek kalitesi</span><div class="bar-track"><div class="bar-fill-tq" style="width:80%"></div></div><span class="bar-val">8.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">Mevzuat uyumu</span><div class="bar-track"><div class="bar-fill-tq" style="width:90%"></div></div><span class="bar-val">9.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">Fiyat/kalite</span><div class="bar-track"><div class="bar-fill-tq" style="width:88%"></div></div><span class="bar-val">8.8</span></div>
+      <div class="sum-verdict">KOBİ kullanıcılarının favorisi. Tek seferlik lisans, kolay kurulum ve uygun fiyat öne çıkan özellikler. Bulut ve CRM eksikliği temel sınırlama.</div>
+    </div>
+
+    <div class="sum-card">
+      <div class="sum-card-header">
+        <div class="sum-icon" style="background:#0F9B8E">DİA</div>
+        <div>
+          <div class="sum-name">DİA Bulut ERP</div>
+          <div class="sum-score-row"><span class="sum-score">8.5</span><span style="color:var(--text-muted);font-size:12px">/10</span></div>
+          <div class="sum-stars-sm">★★★★½</div>
+        </div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Kullanım kolaylığı</span><div class="bar-track"><div class="bar-fill-tq" style="width:90%"></div></div><span class="bar-val">9.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">Destek kalitesi</span><div class="bar-track"><div class="bar-fill-tq" style="width:78%"></div></div><span class="bar-val">7.8</span></div>
+      <div class="bar-row"><span class="bar-lbl">Mevzuat uyumu</span><div class="bar-track"><div class="bar-fill-tq" style="width:92%"></div></div><span class="bar-val">9.2</span></div>
+      <div class="bar-row"><span class="bar-lbl">Fiyat/kalite</span><div class="bar-track"><div class="bar-fill-tq" style="width:82%"></div></div><span class="bar-val">8.2</span></div>
+      <div class="sum-verdict">Kurulum gerektirmeyen bulut yapısı ve mobil erişim en çok beğenilen özellikler. İnternet bağımlılığı ve büyük üretim firmaları için sınırlı kapasite temel şikayetler.</div>
+    </div>
+
+    <div class="sum-card">
+      <div class="sum-card-header">
+        <div class="sum-icon" style="background:#2D6A8F">NV3</div>
+        <div>
+          <div class="sum-name">Nebim V3 ERP</div>
+          <div class="sum-score-row"><span class="sum-score">7.5</span><span style="color:var(--text-muted);font-size:12px">/10</span></div>
+          <div class="sum-stars-sm">★★★½</div>
+        </div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Kullanım kolaylığı</span><div class="bar-track"><div class="bar-fill-tq" style="width:75%"></div></div><span class="bar-val">7.5</span></div>
+      <div class="bar-row"><span class="bar-lbl">Destek kalitesi</span><div class="bar-track"><div class="bar-fill-tq" style="width:72%"></div></div><span class="bar-val">7.2</span></div>
+      <div class="bar-row"><span class="bar-lbl">Sektörel uyum</span><div class="bar-track"><div class="bar-fill-tq" style="width:95%"></div></div><span class="bar-val">9.5</span></div>
+      <div class="bar-row"><span class="bar-lbl">Stabillik</span><div class="bar-track"><div class="bar-fill-tq" style="width:62%"></div></div><span class="bar-val">6.2</span></div>
+      <div class="sum-verdict">Perakende ve mağazacılıkta rakipsiz. Renk/beden/boyut takibi sektöre özel güçlü özellik. Güncelleme stabillik sorunları ve yavaş destek en sık şikayetler.</div>
+    </div>
+
+    <div class="sum-card">
+      <div class="sum-card-header">
+        <div class="sum-icon" style="background:#C0392B">CA</div>
+        <div>
+          <div class="sum-name">caniasERP</div>
+          <div class="sum-score-row"><span class="sum-score">7.2</span><span style="color:var(--text-muted);font-size:12px">/10</span></div>
+          <div class="sum-stars-sm">★★★½</div>
+        </div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Kullanım kolaylığı</span><div class="bar-track"><div class="bar-fill-tq" style="width:52%"></div></div><span class="bar-val">5.2</span></div>
+      <div class="bar-row"><span class="bar-lbl">Özelleştirme</span><div class="bar-track"><div class="bar-fill-tq" style="width:97%"></div></div><span class="bar-val">9.7</span></div>
+      <div class="bar-row"><span class="bar-lbl">Entegrasyon</span><div class="bar-track"><div class="bar-fill-tq" style="width:95%"></div></div><span class="bar-val">9.5</span></div>
+      <div class="bar-row"><span class="bar-lbl">Fiyat/kalite</span><div class="bar-track"><div class="bar-fill-tq" style="width:60%"></div></div><span class="bar-val">6.0</span></div>
+      <div class="sum-verdict">Büyük sanayi firmaları için güçlü açık kaynak çözüm. TROIA platformu benzersiz özelleştirme imkanı sağlıyor. Karmaşıklığı nedeniyle uzman ekip gerektiriyor, KOBİ'ler için uygun değil.</div>
+    </div>
+
+    <div class="sum-card">
+      <div class="sum-card-header">
+        <div class="sum-icon" style="background:#E67E22">WC</div>
+        <div>
+          <div class="sum-name">Workcube</div>
+          <div class="sum-score-row"><span class="sum-score">8.0</span><span style="color:var(--text-muted);font-size:12px">/10</span></div>
+          <div class="sum-stars-sm">★★★★</div>
+        </div>
+      </div>
+      <div class="bar-row"><span class="bar-lbl">Kullanım kolaylığı</span><div class="bar-track"><div class="bar-fill-tq" style="width:80%"></div></div><span class="bar-val">8.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">Kapsam</span><div class="bar-track"><div class="bar-fill-tq" style="width:92%"></div></div><span class="bar-val">9.2</span></div>
+      <div class="bar-row"><span class="bar-lbl">Mobil erişim</span><div class="bar-track"><div class="bar-fill-tq" style="width:90%"></div></div><span class="bar-val">9.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">Fiyat/kalite</span><div class="bar-track"><div class="bar-fill-tq" style="width:72%"></div></div><span class="bar-val">7.2</span></div>
+      <div class="sum-verdict">ERP+CRM+HR tek platformda sunuyor. Sınırsız kullanıcı modeli avantajlı. Fiyat üst segment, yoğun özelleştirme süreci şikayetlerin başında geliyor.</div>
+    </div>
+
+  </div>
+
+  <div class="rev-cta">
+    <div>
+      <h3>Kendi kararınızı <em>verin</em></h3>
+      <p>Yorumları okudunuz, şimdi özellikleri ve fiyatları karşılaştırın.</p>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <a href="fiyatlar.html" style="background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);padding:10px 20px;border-radius:6px;font-size:13px;font-weight:500;text-decoration:none;">Fiyat Rehberi</a>
+      <a href="karsilastir.html" style="background:var(--tq);color:white;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:500;text-decoration:none;">Karşılaştır →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">ERP<span>Kıyasla</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Gizlilik</a></li>
+    <li><a href="#">Kullanım Şartları</a></li>
+    <li><a href="#">İletişim</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 erpkiyasla.com</div>
+</footer>
+
+<script>
+function filterReviews(erp, btn) {
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.rev-card').forEach(card=>{
+    if (erp==='all') {
+      card.style.display='block';
+    } else {
+      card.style.display = card.dataset.erp===erp ? 'block' : 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

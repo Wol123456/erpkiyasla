@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Fiyatları 2026 - ERPKıyasla</title>
+<meta name="description" content="Logo Tiger, AKINSOFT Wolvox, DİA ERP, Workcube ve daha fazlasının 2026 fiyat listesi. Modül detayları ve paket karşılaştırması.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.price-hero{background:linear-gradient(135deg,var(--navy-light) 0%,var(--tq-light) 100%);padding:56px 48px 40px;}
+.price-hero h1{font-family:'Playfair Display',serif;font-size:36px;color:var(--navy);margin-bottom:10px;}
+.price-hero h1 em{font-style:normal;color:var(--tq);}
+.price-hero p{font-size:15px;color:var(--text-muted);max-width:560px;line-height:1.7;}
+.disclaimer{background:#FFF8E7;border:1px solid #F0A500;border-radius:8px;padding:12px 18px;margin:24px 48px 0;font-size:13px;color:#7A5500;display:flex;align-items:flex-start;gap:8px;}
+.price-section{padding:40px 48px;}
+.cat-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:6px;margin-top:40px;}
+.cat-sub{font-size:13px;color:var(--text-muted);margin-bottom:18px;}
+
+/* PRICE CARD */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+.price-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .2s;display:flex;flex-direction:column;}
+.price-card:hover{box-shadow:0 6px 24px rgba(13,43,94,0.08);}
+.price-card.featured{border-color:var(--tq);position:relative;}
+.featured-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--tq);color:#fff;font-size:11px;font-weight:600;padding:3px 14px;border-radius:0 0 8px 8px;white-space:nowrap;}
+.pc-head{padding:18px 20px 14px;}
+.pc-vendor{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;display:flex;align-items:center;gap:5px;}
+.pc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.pc-name{font-size:17px;font-weight:600;color:var(--navy);margin-bottom:3px;}
+.pc-target{font-size:12px;color:var(--text-muted);}
+.pc-price-box{padding:14px 20px;background:var(--navy-light);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.pc-price-label{font-size:11px;color:var(--text-muted);margin-bottom:3px;}
+.pc-price{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy);}
+.pc-price span{font-size:12px;font-weight:400;font-family:'DM Sans',sans-serif;color:var(--text-muted);}
+.pc-price-note{font-size:11px;color:var(--text-muted);margin-top:2px;}
+
+/* TABS */
+.pc-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--white);}
+.pc-tab{flex:1;padding:8px 4px;font-size:11px;font-weight:500;text-align:center;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;transition:all .15s;font-family:'DM Sans',sans-serif;background:none;border-left:none;border-right:none;border-top:none;}
+.pc-tab.on{color:var(--tq);border-bottom-color:var(--tq);}
+
+/* TAB CONTENT */
+.pc-tab-content{display:none;padding:14px 20px;flex:1;}
+.pc-tab-content.on{display:block;}
+.pc-feature{display:flex;align-items:flex-start;gap:6px;font-size:12px;color:var(--navy);padding:4px 0;border-bottom:1px solid var(--border);}
+.pc-feature:last-child{border-bottom:none;}
+.pc-feature .fi{flex-shrink:0;font-size:13px;margin-top:1px;}
+.pc-feature.no{color:var(--text-muted);}
+.pc-feature.paid{color:#7A5500;}
+.pc-feature .badge{font-size:10px;padding:1px 6px;border-radius:10px;margin-left:auto;flex-shrink:0;}
+.badge-free{background:var(--tq-light);color:var(--tq);}
+.badge-paid{background:#FFF8E7;color:#7A5500;}
+
+/* MODULE LIST */
+.mod-list{display:flex;flex-direction:column;gap:0;}
+.mod-item{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.mod-item:last-child{border-bottom:none;}
+.mod-name{display:flex;align-items:center;gap:5px;color:var(--navy);}
+.mod-status{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;}
+.ms-dahil{background:var(--tq-light);color:var(--tq);}
+.ms-ekstra{background:#FFF8E7;color:#7A5500;}
+.ms-yok{background:var(--navy-light);color:var(--text-muted);}
+
+.pc-footer{padding:12px 20px;border-top:1px solid var(--border);margin-top:auto;}
+.pc-btn{display:block;text-align:center;padding:9px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s;}
+.pc-btn-primary{background:var(--tq);color:#fff;}
+.pc-btn-primary:hover{background:var(--navy);}
+.pc-btn-secondary{background:transparent;color:var(--tq);border:1.5px solid var(--tq);}
+.pc-btn-secondary:hover{background:var(--tq-light);}
+.price-source{font-size:10px;color:var(--text-muted);text-align:right;margin-top:5px;}
+.price-source a{color:var(--tq);text-decoration:none;}
+
+/* SUMMARY TABLE */
+.sum-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:8px;font-size:13px;}
+.sum-table thead tr{background:var(--navy);}
+.sum-table thead th{padding:11px 14px;color:rgba(255,255,255,.8);text-align:left;font-size:12px;font-weight:500;}
+.sum-table thead th:first-child{color:#fff;}
+.sum-table tbody td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.sum-table tbody tr:last-child td{border-bottom:none;}
+.sum-table tbody tr:hover td{background:var(--navy-light);}
+.check{color:var(--tq);font-size:14px;}
+.cross{color:#C0C8D8;font-size:14px;}
+
+.compare-cta{background:var(--navy);border-radius:12px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;margin-top:16px;}
+.compare-cta h3{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin-bottom:4px;}
+.compare-cta h3 em{font-style:normal;color:var(--tq-mid);}
+.compare-cta p{font-size:13px;color:rgba(255,255,255,.6);}
+
+@media(max-width:900px){
+  .price-grid{grid-template-columns:1fr;}
+  .price-hero,.price-section{padding:32px 20px;}
+  .disclaimer{margin:16px 20px 0;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="logo">ERP<span>Kıyasla</span></a>
+  <ul class="nav-links">
+    <li><a href="karsilastir.html">Karşılaştır</a></li>
+    <li><a href="fiyatlar.html" class="active">Fiyatlar</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="#">Hakkımızda</a></li>
+  </ul>
+  <a href="karsilastir.html" class="nav-cta">Karşılaştırmaya Başla</a>
+</nav>
+
+<div class="price-hero">
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> → <span style="color:var(--tq)">ERP Fiyatları 2026</span></div>
+  <h1>Yerli ERP Yazılımları <em>Fiyat & Modül Rehberi</em></h1>
+  <p>Resmi kaynaklara dayalı güncel fiyatlar ve modül detayları. Her kartta Genel, Modüller ve Fiyat sekmelerini inceleyin.</p>
+</div>
+
+<div class="disclaimer">⚠️ Fiyatlar resmi kaynaklardan derlenmiş olup yıllık güncellenir. KDV dahil değildir. Kesin fiyat için firmanın resmi satış kanalına başvurunuz. Son güncelleme: Haziran 2026.</div>
+
+<div class="price-section">
+
+<!-- LOGO YAZILIM -->
+<div class="cat-title">Logo Yazılım</div>
+<div class="cat-sub">Türkiye'nin en yaygın ERP ailesi — 170.000+ kullanıcı firma</div>
+<div class="price-grid">
+
+  <!-- LOGO GO -->
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0D2B5E"></div>Logo Yazılım</div>
+      <div class="pc-name">Logo GO</div>
+      <div class="pc-target">Küçük & KOBİ işletmeler</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Başlangıç (1 kullanıcı)</div>
+      <div class="pc-price">~85.000 <span>₺ / yıl</span></div>
+      <div class="pc-price-note">LEM (yıllık güncelleme) dahil</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'go-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'go-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'go-fiyat')">Fiyat</button>
+    </div>
+    <div id="go-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Web tabanlı & masaüstü erişim</div>
+      <div class="pc-feature"><span class="fi">✓</span>Türk mevzuatına tam uyum</div>
+      <div class="pc-feature"><span class="fi">✓</span>Logo ekosistemi entegrasyonu</div>
+      <div class="pc-feature"><span class="fi">✓</span>Hızlı kurulum (1-2 hafta)</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Gelişmiş üretim planlama</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Native bulut (SaaS)</div>
+    </div>
+    <div id="go-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok Yönetimi</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & Sipariş</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 Satın Alma</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura / e-Arşiv</div><span class="mod-status ms-ekstra">Ek ücret</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim</div><span class="mod-status ms-yok">Yok</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-yok">Yok</span></div>
+      <div class="mod-item"><div class="mod-name">🤝 CRM</div><span class="mod-status ms-yok">Yok</span></div>
+    </div>
+    <div id="go-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Ana Paket (1 kullanıcı)</div><span style="font-size:12px;font-weight:600;color:var(--navy)">~85.000 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">+2 Kullanıcı artırımı</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+      <div class="mod-item"><div class="mod-name">e-Fatura modülü</div><span style="font-size:12px;color:var(--text-muted)">Ek ücret</span></div>
+      <div class="mod-item"><div class="mod-name">LEM (yıllık güncelleme)</div><span style="font-size:12px;color:var(--tq)">1. yıl ücretsiz</span></div>
+      <div class="mod-item"><div class="mod-name">Eğitim</div><span style="font-size:12px;color:var(--text-muted)">Ayrı ücretli</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.logo.com.tr" target="_blank" class="pc-btn pc-btn-secondary">Resmi Fiyat Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.logo.com.tr" target="_blank">logo.com.tr</a></div>
+    </div>
+  </div>
+
+  <!-- LOGO TIGER 3 -->
+  <div class="price-card featured">
+    <div class="featured-badge">En Çok Tercih Edilen</div>
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0D2B5E"></div>Logo Yazılım</div>
+      <div class="pc-name">Logo Tiger 3</div>
+      <div class="pc-target">Orta & Büyük ölçekli işletmeler</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Ana paket (1 kullanıcı)</div>
+      <div class="pc-price">350.100 <span>₺ / yıl</span></div>
+      <div class="pc-price-note">+2 kullanıcı: 290.700 ₺ · +5: 504.700 ₺</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'t3-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'t3-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'t3-fiyat')">Fiyat</button>
+    </div>
+    <div id="t3-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>170.000+ aktif kullanıcı firma</div>
+      <div class="pc-feature"><span class="fi">✓</span>App-in-App genişletilebilir yapı</div>
+      <div class="pc-feature"><span class="fi">✓</span>Çok şirket / çok dil desteği</div>
+      <div class="pc-feature"><span class="fi">✓</span>Geniş iş ortağı ağı</div>
+      <div class="pc-feature"><span class="fi">✓</span>Bordro Plus 100 çalışana kadar ücretsiz</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Native bulut (SaaS)</div>
+    </div>
+    <div id="t3-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok & Depo</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & Sipariş</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 Satın Alma</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim Planlama</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🤝 CRM</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📋 Proje Takibi</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura</div><span class="mod-status ms-ekstra">Ek ücret</span></div>
+      <div class="mod-item"><div class="mod-name">📊 Dış Ticaret</div><span class="mod-status ms-ekstra">235.600 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">🏪 Perakende/POS</div><span class="mod-status ms-ekstra">95.800 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">🌍 Yabancı Dil Paketi</div><span class="mod-status ms-ekstra">252.900 ₺/dil</span></div>
+    </div>
+    <div id="t3-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Ana Paket (1 kullanıcı)</div><span style="font-size:12px;font-weight:600;color:var(--navy)">350.100 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">+2 Kullanıcı artırımı</div><span style="font-size:12px;font-weight:600;color:var(--navy)">290.700 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">+5 Kullanıcı artırımı</div><span style="font-size:12px;font-weight:600;color:var(--navy)">504.700 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">+10 Kullanıcı artırımı</div><span style="font-size:12px;font-weight:600;color:var(--navy)">908.200 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">Teklif Yönetimi</div><span style="font-size:12px;color:var(--text-muted)">184.100 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">Dış Ticaret</div><span style="font-size:12px;color:var(--text-muted)">235.600 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">LEM (1. yıl)</div><span style="font-size:12px;color:var(--tq)">Ücretsiz</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://cdn.logo.com.tr/files/logocomtr/Uploads/Documents/logo-tiger-3-fiyat-listesi.pdf" target="_blank" class="pc-btn pc-btn-primary">Resmi Fiyat Listesi (PDF) →</a>
+      <div class="price-source">Kaynak: <a href="https://www.logo.com.tr" target="_blank">logo.com.tr</a> · Ocak 2026</div>
+    </div>
+  </div>
+
+  <!-- LOGO WINGS -->
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0D2B5E"></div>Logo Yazılım</div>
+      <div class="pc-name">Logo Wings ERP</div>
+      <div class="pc-target">Orta & Büyük — Web tabanlı</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Kullanıcı sayısına göre</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Yıllık abonelik modeli</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'lw-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'lw-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'lw-fiyat')">Fiyat</button>
+    </div>
+    <div id="lw-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Tam web tabanlı mimari</div>
+      <div class="pc-feature"><span class="fi">✓</span>Mobil uyumlu erişim</div>
+      <div class="pc-feature"><span class="fi">✓</span>Düşük kurulum maliyeti</div>
+      <div class="pc-feature"><span class="fi">✓</span>Çok şirket desteği</div>
+      <div class="pc-feature"><span class="fi">✓</span>e-Dönüşüm entegre</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Açık kaynak kod</div>
+    </div>
+    <div id="lw-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok & Depo</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & CRM</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 Satın Alma</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📱 Mobil Erişim</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🔗 Tedarik Zinciri</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Dönüşüm</div><span class="mod-status ms-ekstra">Ek ücret</span></div>
+    </div>
+    <div id="lw-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Lisans modeli</div><span style="font-size:12px;color:var(--text-muted)">Yıllık abonelik</span></div>
+      <div class="mod-item"><div class="mod-name">Fiyatlandırma</div><span style="font-size:12px;color:var(--text-muted)">Kullanıcı başına</span></div>
+      <div class="mod-item"><div class="mod-name">Kurulum maliyeti</div><span style="font-size:12px;color:var(--tq)">Düşük</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.logo.com.tr" target="_blank" class="pc-btn pc-btn-secondary">Teklif Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.logo.com.tr" target="_blank">logo.com.tr</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- AKINSOFT -->
+<div class="cat-title">AKINSOFT</div>
+<div class="cat-sub">KOBİ ve perakende odaklı uygun fiyatlı ERP çözümleri</div>
+<div class="price-grid">
+
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0F6E56"></div>AKINSOFT</div>
+      <div class="pc-name">OctoPlus ERP</div>
+      <div class="pc-target">Küçük işletmeler & esnaf</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Tek seferlik lisans</div>
+      <div class="pc-price">~15.000 <span>₺'den</span></div>
+      <div class="pc-price-note">Modüle göre değişir</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'op-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'op-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'op-fiyat')">Fiyat</button>
+    </div>
+    <div id="op-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Çok kolay kullanım</div>
+      <div class="pc-feature"><span class="fi">✓</span>Hızlı kurulum</div>
+      <div class="pc-feature"><span class="fi">✓</span>Uygun fiyat</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Bulut / Mobil desteği</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Üretim & İK modülü</div>
+    </div>
+    <div id="op-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Ön Muhasebe</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok Yönetimi</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & Faturalama</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏦 Kasa / Banka</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura / e-Arşiv</div><span class="mod-status ms-ekstra">Ek ücret</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim</div><span class="mod-status ms-yok">Yok</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-yok">Yok</span></div>
+      <div class="mod-item"><div class="mod-name">🤝 CRM</div><span class="mod-status ms-yok">Yok</span></div>
+    </div>
+    <div id="op-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Başlangıç lisans</div><span style="font-size:12px;font-weight:600;color:var(--navy)">~15.000 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">Lisans tipi</div><span style="font-size:12px;color:var(--text-muted)">Tek seferlik</span></div>
+      <div class="mod-item"><div class="mod-name">Güncelleme</div><span style="font-size:12px;color:var(--tq)">Minor: Ücretsiz</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.akinsoft.com.tr" target="_blank" class="pc-btn pc-btn-secondary">Resmi Fiyat Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.akinsoft.com.tr" target="_blank">akinsoft.com.tr</a></div>
+    </div>
+  </div>
+
+  <div class="price-card featured">
+    <div class="featured-badge">KOBİ'lerin Tercihi</div>
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0F6E56"></div>AKINSOFT</div>
+      <div class="pc-name">Wolvox ERP</div>
+      <div class="pc-target">KOBİ & Perakende</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Modüler lisanslama</div>
+      <div class="pc-price">~45.000 <span>₺'den</span></div>
+      <div class="pc-price-note">Kampanyalı fiyatlar mevcut</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'wv-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'wv-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'wv-fiyat')">Fiyat</button>
+    </div>
+    <div id="wv-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Barkod/POS entegrasyonu</div>
+      <div class="pc-feature"><span class="fi">✓</span>Seri/Lot takibi detaylı</div>
+      <div class="pc-feature"><span class="fi">✓</span>Yerinde kurulum + eğitim</div>
+      <div class="pc-feature"><span class="fi">✓</span>Uygun fiyatlı lisans</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Bulut / Mobil desteği</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Gelişmiş CRM</div>
+    </div>
+    <div id="wv-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok & Depo</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & Sipariş</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 Satın Alma</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏷 Barkod / POS</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🔢 Seri / Lot Takibi</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📋 Fiyat Listesi</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim (Temel)</div><span class="mod-status ms-ekstra">Ek modül</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura / e-Arşiv</div><span class="mod-status ms-ekstra">Kontör bazlı</span></div>
+      <div class="mod-item"><div class="mod-name">🤝 CRM (Gelişmiş)</div><span class="mod-status ms-yok">Yok</span></div>
+    </div>
+    <div id="wv-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Başlangıç lisans</div><span style="font-size:12px;font-weight:600;color:var(--navy)">~45.000 ₺</span></div>
+      <div class="mod-item"><div class="mod-name">Lisans tipi</div><span style="font-size:12px;color:var(--text-muted)">Tek seferlik</span></div>
+      <div class="mod-item"><div class="mod-name">Minor güncelleme</div><span style="font-size:12px;color:var(--tq)">Ücretsiz</span></div>
+      <div class="mod-item"><div class="mod-name">Major versiyon geçiş</div><span style="font-size:12px;color:var(--text-muted)">Ücretli</span></div>
+      <div class="mod-item"><div class="mod-name">Kampanya indirimleri</div><span style="font-size:12px;color:var(--tq)">Dönemsel %indirim</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.akinsoft.com.tr" target="_blank" class="pc-btn pc-btn-primary">Resmi Fiyat Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.akinsoft.com.tr" target="_blank">akinsoft.com.tr</a></div>
+    </div>
+  </div>
+
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0F6E56"></div>AKINSOFT</div>
+      <div class="pc-name">Wolvox9</div>
+      <div class="pc-target">Yeni nesil esnek lisans</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Modül + Kullanıcı bazlı</div>
+      <div class="pc-price">Esnek fiyat</div>
+      <div class="pc-price-note">Sadece ihtiyacın kadar öde</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'w9-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'w9-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'w9-fiyat')">Fiyat</button>
+    </div>
+    <div id="w9-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Yeni nesil arayüz</div>
+      <div class="pc-feature"><span class="fi">✓</span>Esnek modül seçimi</div>
+      <div class="pc-feature"><span class="fi">✓</span>İstenen kullanıcı sayısı</div>
+      <div class="pc-feature"><span class="fi">✓</span>Minor güncelleme ücretsiz</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Native bulut</div>
+    </div>
+    <div id="w9-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe</div><span class="mod-status ms-dahil">Seçilebilir</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok</div><span class="mod-status ms-dahil">Seçilebilir</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış</div><span class="mod-status ms-dahil">Seçilebilir</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim</div><span class="mod-status ms-dahil">Seçilebilir</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-dahil">Seçilebilir</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Dönüşüm</div><span class="mod-status ms-ekstra">Kontör bazlı</span></div>
+    </div>
+    <div id="w9-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Fiyatlandırma</div><span style="font-size:12px;color:var(--text-muted)">Modül + Kullanıcı</span></div>
+      <div class="mod-item"><div class="mod-name">Esneklik</div><span style="font-size:12px;color:var(--tq)">Yüksek</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.akinsoft.com/wolvox9" target="_blank" class="pc-btn pc-btn-secondary">İncele →</a>
+      <div class="price-source">Kaynak: <a href="https://www.akinsoft.com.tr" target="_blank">akinsoft.com.tr</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- DIA -->
+<div class="cat-title">DİA Yazılım</div>
+<div class="cat-sub">Türkiye'nin öncü bulut ERP çözümü — sunucu kurulumu yok</div>
+<div class="price-grid">
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0F9B8E"></div>DİA Yazılım</div>
+      <div class="pc-name">DİA Standart</div>
+      <div class="pc-target">1–10 kullanıcı</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Aylık abonelik (SaaS)</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Kullanıcı başına aylık ücret</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'ds-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'ds-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'ds-fiyat')">Fiyat</button>
+    </div>
+    <div id="ds-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Kurulum gerektirmez</div>
+      <div class="pc-feature"><span class="fi">✓</span>Her yerden mobil erişim</div>
+      <div class="pc-feature"><span class="fi">✓</span>Otomatik güncelleme</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Max 10 kullanıcı</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Özel uyarlama</div>
+    </div>
+    <div id="ds-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok & Sipariş</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura / e-Arşiv</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📱 Mobil Erişim</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim (Reçete)</div><span class="mod-status ms-yok">Yok</span></div>
+      <div class="mod-item"><div class="mod-name">🍽 Restoran Modülü</div><span class="mod-status ms-yok">Yok</span></div>
+    </div>
+    <div id="ds-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Model</div><span style="font-size:12px;color:var(--text-muted)">Aylık SaaS</span></div>
+      <div class="mod-item"><div class="mod-name">IT yatırımı</div><span style="font-size:12px;color:var(--tq)">Sıfır</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.dia.com.tr" target="_blank" class="pc-btn pc-btn-secondary">Fiyat Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.dia.com.tr" target="_blank">dia.com.tr</a></div>
+    </div>
+  </div>
+
+  <div class="price-card featured">
+    <div class="featured-badge">Bulut ERP Lideri</div>
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0F9B8E"></div>DİA Yazılım</div>
+      <div class="pc-name">DİA Enterprise</div>
+      <div class="pc-target">11–50 kullanıcı</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Aylık abonelik (SaaS)</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Sunucu & IT maliyeti yok</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'de-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'de-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'de-fiyat')">Fiyat</button>
+    </div>
+    <div id="de-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Sektörel modüller (restoran, otel)</div>
+      <div class="pc-feature"><span class="fi">✓</span>e-Ticaret entegrasyonu</div>
+      <div class="pc-feature"><span class="fi">✓</span>Mobil plasiyer uygulaması</div>
+      <div class="pc-feature"><span class="fi">✓</span>Excel entegrasyonu</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Büyük ölçek üretim</div>
+    </div>
+    <div id="de-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok (Seri/Lot)</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & Sipariş</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 Satın Alma</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim (Reçete/Emir)</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 e-Ticaret</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📱 Mobil Plasiyer</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🍽 Restoran Modülü</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏨 Otel Modülü</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura / e-Arşiv</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">⚙️ Süreç Yönetimi</div><span class="mod-status ms-dahil">Dahil</span></div>
+    </div>
+    <div id="de-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Model</div><span style="font-size:12px;color:var(--text-muted)">Aylık SaaS</span></div>
+      <div class="mod-item"><div class="mod-name">Sunucu maliyeti</div><span style="font-size:12px;color:var(--tq)">Sıfır</span></div>
+      <div class="mod-item"><div class="mod-name">IT yatırımı</div><span style="font-size:12px;color:var(--tq)">Sıfır</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.dia.com.tr" target="_blank" class="pc-btn pc-btn-primary">Fiyat Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.dia.com.tr" target="_blank">dia.com.tr</a></div>
+    </div>
+  </div>
+
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#0F9B8E"></div>DİA Yazılım</div>
+      <div class="pc-name">DİA Özel Proje</div>
+      <div class="pc-target">50+ kullanıcı</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Özel fiyatlandırma</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Özel uyarlama dahil</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'dp-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'dp-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'dp-fiyat')">Fiyat</button>
+    </div>
+    <div id="dp-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Tüm Enterprise özellikler</div>
+      <div class="pc-feature"><span class="fi">✓</span>Özel uyarlama</div>
+      <div class="pc-feature"><span class="fi">✓</span>Dedicated destek</div>
+      <div class="pc-feature"><span class="fi">✓</span>SLA garantisi</div>
+      <div class="pc-feature"><span class="fi">✓</span>Sınırsız kullanıcı</div>
+    </div>
+    <div id="dp-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Tüm modüller</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🔧 Özel Uyarlama</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🔌 API & Entegrasyon</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📞 Dedicated Destek</div><span class="mod-status ms-dahil">Dahil</span></div>
+    </div>
+    <div id="dp-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Fiyatlandırma</div><span style="font-size:12px;color:var(--text-muted)">Özel proje bazlı</span></div>
+      <div class="mod-item"><div class="mod-name">İletişim</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.dia.com.tr" target="_blank" class="pc-btn pc-btn-secondary">İletişime Geç →</a>
+      <div class="price-source">Kaynak: <a href="https://www.dia.com.tr" target="_blank">dia.com.tr</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- WORKCUBE -->
+<div class="cat-title">Workcube</div>
+<div class="cat-sub">ERP + CRM + HR tek platformda — bulut tabanlı all-in-one çözüm</div>
+<div class="price-grid">
+  <div class="price-card featured">
+    <div class="featured-badge">All-in-One</div>
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#E67E22"></div>Workcube</div>
+      <div class="pc-name">Workcube Bulut</div>
+      <div class="pc-target">Orta ölçekli işletmeler</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Sınırsız kullanıcı</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Kullanıcı sayısı sınırı yok</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'wc-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'wc-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'wc-fiyat')">Fiyat</button>
+    </div>
+    <div id="wc-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>ERP + CRM + HR tek platformda</div>
+      <div class="pc-feature"><span class="fi">✓</span>Sınırsız kullanıcı</div>
+      <div class="pc-feature"><span class="fi">✓</span>AutoCAD/TopSolid entegrasyonu</div>
+      <div class="pc-feature"><span class="fi">✓</span>Fason üretim desteği</div>
+      <div class="pc-feature"><span class="fi">✓</span>Açık kaynak kod</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Gelişmiş POS/Perakende</div>
+    </div>
+    <div id="wc-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Muhasebe & Finans</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok & Depo</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış & Sipariş</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 Online İhale/Satın Alma</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim (MRP/MES)</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🤝 CRM (Gelişmiş)</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">👥 İnsan Kaynakları</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📋 Proje Yönetimi</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛍 e-Ticaret</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🔩 Fason Üretim</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📐 AutoCAD Entegrasyonu</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura / e-Arşiv</div><span class="mod-status ms-dahil">Dahil</span></div>
+    </div>
+    <div id="wc-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Model</div><span style="font-size:12px;color:var(--text-muted)">Bulut / On-premise</span></div>
+      <div class="mod-item"><div class="mod-name">Kullanıcı sınırı</div><span style="font-size:12px;color:var(--tq)">Sınırsız</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.workcube.com/tr/all-in-one-prices-erp-crm-hr" target="_blank" class="pc-btn pc-btn-primary">Fiyat Listesi →</a>
+      <div class="price-source">Kaynak: <a href="https://www.workcube.com" target="_blank">workcube.com</a></div>
+    </div>
+  </div>
+
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#E67E22"></div>Workcube</div>
+      <div class="pc-name">Watom</div>
+      <div class="pc-target">Küçük & mikro işletmeler</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Uygun fiyatlı başlangıç</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Büyüdükçe Workcube'e geçiş</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'wa-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'wa-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'wa-fiyat')">Fiyat</button>
+    </div>
+    <div id="wa-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Küçük işletmeler için tasarlandı</div>
+      <div class="pc-feature"><span class="fi">✓</span>Bulut tabanlı</div>
+      <div class="pc-feature"><span class="fi">✓</span>Workcube'e geçiş imkanı</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Gelişmiş CRM</div>
+      <div class="pc-feature no"><span class="fi">✗</span>Üretim modülü</div>
+    </div>
+    <div id="wa-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">💰 Temel Muhasebe</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📦 Stok</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🛒 Satış</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">📄 e-Fatura</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🏭 Üretim</div><span class="mod-status ms-yok">Yok</span></div>
+      <div class="mod-item"><div class="mod-name">🤝 CRM</div><span class="mod-status ms-yok">Yok</span></div>
+    </div>
+    <div id="wa-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Model</div><span style="font-size:12px;color:var(--text-muted)">Aylık SaaS</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.workcube.com/watom-kucuk-mikro-kobi-isletme-muhasebe-uretim-ticaret-yazilimi-erp-crm-hr" target="_blank" class="pc-btn pc-btn-secondary">İncele →</a>
+      <div class="price-source">Kaynak: <a href="https://www.workcube.com" target="_blank">workcube.com</a></div>
+    </div>
+  </div>
+
+  <div class="price-card">
+    <div class="pc-head">
+      <div class="pc-vendor"><div class="pc-dot" style="background:#E67E22"></div>Workcube</div>
+      <div class="pc-name">Workcube On-Premise</div>
+      <div class="pc-target">Kendi sunucusunda çalışmak isteyen</div>
+    </div>
+    <div class="pc-price-box">
+      <div class="pc-price-label">Tek seferlik + yıllık bakım</div>
+      <div class="pc-price">Teklif alın</div>
+      <div class="pc-price-note">Kendi sunucunda barındır</div>
+    </div>
+    <div class="pc-tabs">
+      <button class="pc-tab on" onclick="switchTab(this,'wo-genel')">Genel</button>
+      <button class="pc-tab" onclick="switchTab(this,'wo-modul')">Modüller</button>
+      <button class="pc-tab" onclick="switchTab(this,'wo-fiyat')">Fiyat</button>
+    </div>
+    <div id="wo-genel" class="pc-tab-content on">
+      <div class="pc-feature"><span class="fi">✓</span>Tüm bulut özellikleri</div>
+      <div class="pc-feature"><span class="fi">✓</span>Veri kontrolü firmada</div>
+      <div class="pc-feature"><span class="fi">✓</span>Açık kaynak kod</div>
+      <div class="pc-feature"><span class="fi">✓</span>Özelleştirme imkanı</div>
+      <div class="pc-feature no"><span class="fi">✗</span>IT altyapısı gerekir</div>
+    </div>
+    <div id="wo-modul" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Tüm Workcube modülleri</div><span class="mod-status ms-dahil">Dahil</span></div>
+      <div class="mod-item"><div class="mod-name">🔧 Özelleştirme</div><span class="mod-status ms-dahil">Mümkün</span></div>
+      <div class="mod-item"><div class="mod-name">🛡 Veri Güvenliği</div><span class="mod-status ms-dahil">Firmada</span></div>
+    </div>
+    <div id="wo-fiyat" class="pc-tab-content">
+      <div class="mod-item"><div class="mod-name">Model</div><span style="font-size:12px;color:var(--text-muted)">Tek seferlik + bakım</span></div>
+      <div class="mod-item"><div class="mod-name">Kesin fiyat için</div><span style="font-size:12px;color:var(--text-muted)">Teklif alın</span></div>
+    </div>
+    <div class="pc-footer">
+      <a href="https://www.workcube.com/tr/all-in-one-prices-erp-crm-hr" target="_blank" class="pc-btn pc-btn-secondary">Teklif Al →</a>
+      <div class="price-source">Kaynak: <a href="https://www.workcube.com" target="_blank">workcube.com</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÖZET TABLO -->
+<div class="cat-title" style="margin-top:40px">Genel Karşılaştırma Tablosu</div>
+<div class="cat-sub">Tüm ERP'leri hızlıca karşılaştırın</div>
+<table class="sum-table">
+  <thead>
+    <tr>
+      <th>ERP</th><th>Hedef</th><th>Model</th><th>Bulut</th><th>Üretim</th><th>CRM</th><th>Başlangıç Fiyatı</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Logo GO</strong></td><td>KOBİ</td><td>Yıllık LEM</td><td>Kısmi</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td>~85.000 ₺/yıl</td></tr>
+    <tr><td><strong>Logo Tiger 3</strong></td><td>Orta-Büyük</td><td>Yıllık LEM</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>350.100 ₺/yıl</td></tr>
+    <tr><td><strong>Logo Wings</strong></td><td>Orta-Büyük</td><td>Yıllık</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>Teklif alın</td></tr>
+    <tr><td><strong>OctoPlus</strong></td><td>Küçük</td><td>Tek seferlik</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td>~15.000 ₺</td></tr>
+    <tr><td><strong>Wolvox ERP</strong></td><td>KOBİ</td><td>Tek seferlik</td><td><span class="cross">✗</span></td><td>Temel</td><td><span class="cross">✗</span></td><td>~45.000 ₺</td></tr>
+    <tr><td><strong>DİA Standart</strong></td><td>KOBİ</td><td>Aylık SaaS</td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td>Teklif alın</td></tr>
+    <tr><td><strong>DİA Enterprise</strong></td><td>Tüm ölçekler</td><td>Aylık SaaS</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>Temel</td><td>Teklif alın</td></tr>
+    <tr><td><strong>Workcube</strong></td><td>Orta</td><td>Bulut/On-prem</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>Teklif alın</td></tr>
+    <tr><td><strong>caniasERP</strong></td><td>Büyük</td><td>On-prem/Bulut</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>Yüksek (proje)</td></tr>
+    <tr><td><strong>Nebim V3</strong></td><td>Perakende</td><td>Lisans</td><td>Kısmi</td><td>Sınırlı</td><td>Perakende</td><td>Teklif alın</td></tr>
+    <tr><td><strong>ERP LioX</strong></td><td>Orta</td><td>Aylık SaaS</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>Temel</td><td>Teklif alın</td></tr>
+    <tr><td><strong>Mikro Run</strong></td><td>Orta</td><td>Lisans + bakım</td><td>Kısmi</td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td>~100.000 ₺</td></tr>
+  </tbody>
+</table>
+<div class="price-source" style="margin-bottom:24px">* Fiyatlar tahmini aralıklar olup kesin fiyat için satıcıya başvurunuz. KDV dahil değildir.</div>
+
+<div class="compare-cta">
+  <div>
+    <h3>Detaylı karşılaştırma mı istiyorsunuz? <em>Hemen başlayın</em></h3>
+    <p>İkili, üçlü veya dörtlü karşılaştırma ile özellik ve modülleri yan yana inceleyin.</p>
+  </div>
+  <div style="display:flex;gap:10px;">
+    <a href="karsilastir.html" style="background:var(--tq);color:#fff;padding:11px 24px;border-radius:6px;font-size:13px;font-weight:500;text-decoration:none;">Karşılaştır →</a>
+  </div>
+</div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">ERP<span>Kıyasla</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Gizlilik</a></li>
+    <li><a href="#">Kullanım Şartları</a></li>
+    <li><a href="#">İletişim</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 erpkiyasla.com</div>
+</footer>
+
+<script>
+function switchTab(btn, targetId) {
+  const card = btn.closest('.price-card');
+  card.querySelectorAll('.pc-tab').forEach(t => t.classList.remove('on'));
+  card.querySelectorAll('.pc-tab-content').forEach(c => c.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(targetId).classList.add('on');
+}
+</script>
+</body>
+</html>
